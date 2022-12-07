@@ -1,13 +1,18 @@
 import imgHeader from './imgHeader.jpg'
-import './headerStyles.module.css'
+import styles from './headerStyles.module.css'
 
 export function Header() {
   return (
-    <div className="header">
-      <img src={imgHeader} className="card-img-top" alt="..." />
-      <div>
-        <button type="button" className="btn btn-warning headerBtnLeft">Login</button>
-        <button type="button" className="btn btn-warning headerBtnRight">Autorization</button>
+    <div className="container">
+      <div className="d-flex flex-column align-middle">
+        <div className="mb-2">
+          <img src={imgHeader} className={`${styles.header}`} alt="" />
+        </div>
+        <hr />
+        <div className="text-center">
+          <button type="button" className="btn btn-warning mx-2">Login</button>
+          <button type="button" className="btn btn-warning mx-2">Skip</button>
+        </div>
       </div>
     </div>
   )
