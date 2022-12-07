@@ -1,0 +1,20 @@
+
+
+.header{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.headerBtnLeft{
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.headerBtnRigh{
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  background-color: aqua;
+}
