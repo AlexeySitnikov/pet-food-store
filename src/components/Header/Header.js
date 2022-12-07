@@ -4,8 +4,8 @@ import styles from './headerStyles.module.css'
 export function Header() {
   return (
     <div className="container">
-      <div className="d-flex flex-column align-middle">
-        <div className="mb-2">
+      <div className={`${styles.headerDiv} flex-column`}>
+        <div className="text-center mb-2">
           <img src={imgHeader} className={`${styles.header}`} alt="" />
         </div>
         <hr />
