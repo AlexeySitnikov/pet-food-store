@@ -15,15 +15,16 @@ export function Main() {
   const [products, setProducts] = useState([])
 
   // eslint-disable-next-line no-unused-vars
-  const addNewProduct = ((product) => {
-    const newProduct = {
-      id: product._id,
-      productName: product.name,
-      productPrice: product.price,
-      // ...product,
-    }
-    setProducts((prev) => [...prev, newProduct])
-  })
+  // const addNewProduct = ((product) => {
+  //   const newProduct = {
+  //     // id: product._id,
+  //     // productName: product.name,
+  //     // productPrice: product.price,
+  //     // ...product,
+  //   }
+  //   setProducts((prev) => [...prev, newProduct])
+  // })
+  // setProducts((prev) => [...prev, products])
 
   useEffect(() => {
     fetch('https://api.react-learning.ru/products', {
@@ -32,6 +33,8 @@ export function Main() {
         authorization: `${TOKEN}`,
       },
     }).then((responce) => (responce.json())).then((productsList) => {
+      // console.log(productsList)
+      // productsList.products.forEach((el) => setProducts(el))
       setProducts(productsList.products)
     })
   }, [])
