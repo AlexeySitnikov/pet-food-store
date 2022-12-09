@@ -7,11 +7,11 @@ import { Footer } from './components/Footer/Footer'
 
 function App() {
   return (
-    <>
+    <div className='container'>
       <Header></Header>
       <Main></Main>
       <Footer></Footer>
-    </>
+    </div>
   )
 }
 
