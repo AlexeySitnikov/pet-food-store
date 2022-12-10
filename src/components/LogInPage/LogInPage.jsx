@@ -1,4 +1,4 @@
-import { USER_TOKEN } from '../../utils/constrans'
+import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 import imgHeader from './imgLogInPage.jpg'
 import styles from './logInPageStyles.module.css'
 
@@ -6,15 +6,6 @@ const USER = {
   email: 'alexey.sitnikov@bk.ru',
   password: '12345',
 }
-//   const autorization = async () => {
-//     const response = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
-//       headers: {
-//         authorization: TOKEN,
-//       },
-//     })
-//     const res = await response.json()
-//     return res
-//   }
 
 export function LogInPage() {
   const autorization = async () => {
@@ -32,8 +23,14 @@ export function LogInPage() {
   const logInBtn = (e) => {
     e.preventDefault()
     autorization().then((result) => {
-      console.log(result)
-      localStorage.setItem(USER_TOKEN, JSON.stringify(result.token))
+      localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
+    }).catch(new Error('Ошибка авторизации'))
+  }
+
+  const autorizationBtn = (e) => {
+    e.preventDefault()
+    autorization().then((result) => {
+      localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
     }).catch(new Error('Ошибка авторизации'))
   }
 
@@ -46,7 +43,7 @@ export function LogInPage() {
         <hr />
         <div className="text-center">
           <button onClick={logInBtn} type="button" className="btn btn-warning mx-2">Login</button>
-          <button type="button" className="btn btn-warning mx-2">Skip</button>
+          <button onClick={autorizationBtn} type="button" className="btn btn-warning mx-2">Autorization</button>
         </div>
       </div>
     </div>
