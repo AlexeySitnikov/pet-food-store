@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'
 
@@ -11,67 +13,20 @@ import styles from './mainPage.module.css'
 //   password: '12345',
 // }
 
-export function Main({ products }) {
-  // const [products, setProducts] = useState([])
+export function Main() {
+  const [products, setProducts] = useState([])
 
-  // const [token, setToken] = useState([])
+  const tokenFromLS = localStorage.getItem(TOKEN_KEY_IN_LS)
+  const token = tokenFromLS ? JSON.parse(tokenFromLS) : ''
 
-  // eslint-disable-next-line no-unused-vars
-  // const addNewProduct = ((product) => {
-  //   const newProduct = {
-  //     // id: product._id,
-  //     // productName: product.name,
-  //     // productPrice: product.price,
-  //     // ...product,
-  //   }
-  //   setProducts((prev) => [...prev, newProduct])
-  // })
-  // setProducts((prev) => [...prev, products])
-
-  // useEffect(() => {
-  //   const tokenFromLS = localStorage.getItem(TOKEN_KEY_IN_LS)
-  //   const prepareToken = tokenFromLS ? JSON.parse(tokenFromLS) : []
-  //   if (tokenFromLS.length) {
-  //     setToken(prepareToken)
-  //   }
-  // }, [])
-
-  // const getAllProducts = () => {
-  //   fetch('https://api.react-learning.ru/products', {
-  //     method: 'GET',
-  //     headers: {
-  //       authorization: `${token}`,
-  //     },
-  //   }).then((responce) => (responce.json())).then((productsList) => {
-  //     // console.log(productsList)
-  //     // productsList.products.forEach((el) => setProducts(el))
-  //     setProducts(productsList.products)
-  //   })
-  // }
-  // getAllProducts()
-  // useEffect(() => {
-  //   fetch('https://api.react-learning.ru/products', {
-  //     method: 'GET',
-  //     headers: {
-  //       authorization: `${TOKEN}`,
-  //     },
-  //   }).then((responce) => (responce.json())).then((productsList) => {
-  //     // console.log(productsList)
-  //     // productsList.products.forEach((el) => setProducts(el))
-  //     setProducts(productsList.products)
-  //   })
-  // }, [])
-
-  // console.log({ products })
-
-  // const response = await fetch('https://api.react-learning.ru/products', {
-  //   method: 'GET',
-  //   headers: {
-  //     authorization: `${TOKEN}`,
-  //   },
-  // })
-  // const result = response.json()
-  // console.log(result)
+  fetch('https://api.react-learning.ru/products', {
+    method: 'GET',
+    headers: {
+      authorization: `${token}`,
+    },
+  }).then((responce) => (responce.json())).then((productsList) => {
+    setProducts(productsList.products)
+  })
 
   return (
     <div className={`${styles.mainPage} justify-content-center align-items-center`}>

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 import imgHeader from './imgLogInPage.jpg'
 import styles from './logInPageStyles.module.css'
@@ -8,6 +9,7 @@ const USER = {
 }
 
 export function LogInPage() {
+  const navigate = useNavigate()
   const autorization = async () => {
     const response = await fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
@@ -24,6 +26,8 @@ export function LogInPage() {
     e.preventDefault()
     autorization().then((result) => {
       localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
+      console.log(TOKEN_KEY_IN_LS)
+      return navigate('/')
     }).catch(new Error('Ошибка авторизации'))
   }
 
