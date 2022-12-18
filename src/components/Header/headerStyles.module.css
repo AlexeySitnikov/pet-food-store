@@ -1,7 +1,3 @@
-
-
-
-
 header{
   display: flex;
   justify-content: space-between;
@@ -14,6 +10,11 @@ header{
   right: 0;
   background-color: chocolate;
   transition: box-shadow, background-color .25s ease;
+}
+
+.header__logo{
+height: 150px;
+
 }
 
 button{

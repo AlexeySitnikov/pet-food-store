@@ -1,10 +1,11 @@
 import styles from './headerStyles.module.css'
+import logo from './Header_logo.jpg'
 
 export function Header() {
   return (
-    <div className={`${styles.header} d-flex my-5`}>
+    <div className={`${styles.header} d-flex my-5 align-self-center align-items-center`}>
       <div className="me-auto p-2">
-        <img className="header__logo" src="img/logo.svg" alt="logo" />
+        <img className="header__logo" src={`${logo}`} alt="logo" />
       </div>
       <div className={`${styles.header__control}`}>
         <button type="button" className={`${styles.button} px-5 mx-1`}>Primary</button>
