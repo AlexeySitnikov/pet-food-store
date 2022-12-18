@@ -6,6 +6,28 @@ export function ProductsList({ products }) {
     <>
       {
       products.map((el) => (
+        /* <div class={`${styles.product-item}"">
+            <div class="product-img">
+              <a href="">
+                <img src="https://html5book.ru/wp-content/uploads/2015/10/black-dress.jpg">
+              </a>
+            </div>
+            <div class="product-list">
+              <h3>Маленькое черное платье</h3>
+              <div class="stars"></div>
+              <span class="price">₽ 1999</span>
+              <div class="actions">
+                <div class="add-to-cart">
+                  <a href="" class="cart-button">В корзину</a>
+                </div>
+                <div class="add-to-links">
+                  <a href="" class="wishlist"></a>
+                  <a href="" class="compare"></a>
+                </div>
+              </div>
+            </div>
+        </div> */
+
         <div key={el._id} className={`${styles.cardProduct} card align-items-center align-middle`}>
           <img src={el.pictures} className="card-img-top w-25" alt="dog`s food" />
           <div className="card-body">
