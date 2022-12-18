@@ -1,27 +1,56 @@
-const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzkwNGY3MTU5Yjk4YjAzOGY3NzlkYjQiLCJncm91cCI6InNtOCIsImlhdCI6MTY3MDQwMzM5NiwiZXhwIjoxNzAxOTM5Mzk2fQ.aiA0fkvpYOIrNKOWz2NKZograLmCt_QNfGtU6bDPEiI'
+import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 
-export async function a() {
-  const response = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
-    headers: {
-      authorization: TOKEN,
-    },
-  })
-  const res = await response.json()
-  // console.log(res)
-  // .then((response) => {
-  //   console.log({ response })
-  //   response.json()
-  // }).then((json) => { console.log(json) })
-  // console.log(this.a())
-  return res
+const BASE_URL = 'https://api.react-learning.ru/products'
+const USER = {
+  email: 'alexey.sitnikov@bk.ru',
+  password: '12345',
 }
 
-// //функция запускается при открытии страницы, запрашивает всю информацию из БД
-//  и добавляет результат на страницу
-// const getAllCats = ()=>{
-//   fetch(getAllCatsURL)
-//   .then((response)=>response.json())
-//   .then((json)=>{
-//     json.data.forEach((el) => $divContainer.insertAdjacentHTML('beforeend',cardsHTML(el)));
-//   });
-// }
+class API {
+  constructor(url) {
+    this.url = url
+    this.USER = USER
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  getToken() {
+    return JSON.parse(localStorage.getItem(TOKEN_KEY_IN_LS))
+  }
+
+  async getAllProducts() {
+    const responce = await fetch('https://api.react-learning.ru/products', {
+      method: 'GET',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
+    })
+    const productsList = await responce.json()
+    return productsList.products
+  }
+
+  async getLogIn() {
+    const response = await fetch('https://api.react-learning.ru/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.USER),
+    })
+    const result = await response.json()
+    return result
+  }
+
+  async getAutorization() {
+    const response = await fetch('https://api.react-learning.ru/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.USER),
+    })
+    const result = await response.json()
+    return result
+  }
+}
+
+export const api = new API(BASE_URL)

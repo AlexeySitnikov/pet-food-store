@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
+import { useEffect, useState } from 'react'
+// import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
+import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'
 
@@ -16,17 +17,9 @@ import styles from './mainPage.module.css'
 export function Main() {
   const [products, setProducts] = useState([])
 
-  const tokenFromLS = localStorage.getItem(TOKEN_KEY_IN_LS)
-  const token = tokenFromLS ? JSON.parse(tokenFromLS) : ''
-
-  fetch('https://api.react-learning.ru/products', {
-    method: 'GET',
-    headers: {
-      authorization: `${token}`,
-    },
-  }).then((responce) => (responce.json())).then((productsList) => {
-    setProducts(productsList.products)
-  })
+  useEffect(() => {
+    api.getAllProducts().then((productsArr) => setProducts(productsArr))
+  }, [])
 
   return (
     <div className={`${styles.mainPage} justify-content-center align-items-center`}>
