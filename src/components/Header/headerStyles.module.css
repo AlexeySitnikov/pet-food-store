@@ -2,12 +2,18 @@
 
 
 
-.header{
-  position: relative;
-  /* text-align: center; */
-  /* color: white; */
-  width: 70%;
-  /* align-self: center; */
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  background-color: chocolate;
+  transition: box-shadow, background-color .25s ease;
 }
 
 .headerDiv{
@@ -21,6 +27,7 @@
   align-content: center;
   justify-content: center;
   overflow: auto;
+  z-index: 999;
 }
 
 .headerBlock{
