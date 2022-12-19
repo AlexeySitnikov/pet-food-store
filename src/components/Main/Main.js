@@ -20,7 +20,7 @@ export function Main() {
   useEffect(() => {
     api.getAllProducts().then((productsArr) => setProducts(productsArr))
   }, [])
-  console.log('from branch task_2')
+
   return (
     <div className={`${styles.mainPage} justify-content-center align-items-center`}>
       <ProductsList products={products} />
