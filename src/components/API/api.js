@@ -1,15 +1,15 @@
 import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 
 const BASE_URL = 'https://api.react-learning.ru/products'
-const USER = {
-  email: 'alexey.sitnikov@bk.ru',
-  password: '12345',
-}
+// const USER1 = {
+//   email: 'alexey.sitnikov@bk.ru',
+//   password: '12345',
+// }
 
 class API {
   constructor(url) {
     this.url = url
-    this.USER = USER
+    // this.USER1 = USER1
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -28,16 +28,22 @@ class API {
     return productsList.products
   }
 
-  async getLogIn() {
+  // eslint-disable-next-line class-methods-use-this
+  async getLogIn(email, password) {
+    // eslint-disable-next-line no-unused-vars
+    const USER = {
+      email,
+      password,
+    }
     const response = await fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.USER),
+      body: JSON.stringify(USER),
     })
     const result = await response.json()
-    return result
+    localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
   }
 
   async getAutorization() {
