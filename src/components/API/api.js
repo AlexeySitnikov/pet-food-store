@@ -57,6 +57,17 @@ class API {
     const result = await response.json()
     return result
   }
+
+  async getUserData() {
+    const responce = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
+      method: 'GET',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
+    })
+    const result = await responce.json()
+    return result
+  }
 }
 
 export const api = new API(BASE_URL)

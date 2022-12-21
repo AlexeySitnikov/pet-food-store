@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'
