@@ -1,4 +1,4 @@
-import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
+import { TOKEN_KEY_IN_LS, USER } from '../../utils/constrans'
 
 const BASE_URL = 'https://api.react-learning.ru/products'
 // const USER1 = {
@@ -9,7 +9,6 @@ const BASE_URL = 'https://api.react-learning.ru/products'
 class API {
   constructor(url) {
     this.url = url
-    // this.USER1 = USER1
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -30,11 +29,8 @@ class API {
 
   // eslint-disable-next-line class-methods-use-this
   async getLogIn(email, password) {
-    // eslint-disable-next-line no-unused-vars
-    const USER = {
-      email,
-      password,
-    }
+    USER.email = email
+    USER.password = password
     const response = await fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
       headers: {
