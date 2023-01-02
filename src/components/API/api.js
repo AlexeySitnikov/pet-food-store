@@ -31,8 +31,6 @@ class API {
   async getLogIn(email, password) {
     USER.email = email
     USER.password = password
-    console.log('from getLogin')
-    console.log({ USER })
     const response = await fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
       headers: {

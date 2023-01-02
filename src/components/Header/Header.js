@@ -1,40 +1,56 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import { api } from '../API/api'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
 
 export function Header() {
-  const [user, setUser] = useState({})
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
 
-  useEffect(() => {
-    api.getUserData().then((result) => { setUser(result) })
-  }, [])
+  const GETUSERINFO = ['GETUSERINFO']
+  const getUserInfo = async () => {
+    const responce = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
+      method: 'GET',
+      headers: {
+        authorization: `${api.getToken()}`,
+      },
+    })
+    const result = await responce.json()
+    return result
+  }
+  const query = useQuery({
+    queryKey: GETUSERINFO,
+    queryFn: getUserInfo,
+  })
 
   const showUser = (e) => {
     e.preventDefault()
     setIsModalUserInfoOpen(true)
   }
 
-  return (
-    <>
-      <div className={`${styles.header} d-flex my-5 align-self-center align-items-center`}>
-        <div className="me-auto p-2">
-          <img className={`${styles.header__logo}`} src={`${logo}`} alt="logo" />
+  if (query.isLoading) { return null }
+  if (!query.isLoading && !query.isError) {
+    return (
+      <>
+        <div className={`${styles.header} d-flex my-5 align-self-center align-items-center`}>
+          <div className="me-auto p-2">
+            <img className={`${styles.header__logo}`} src={`${logo}`} alt="logo" />
+          </div>
+          <div className={`${styles.header__control}`}>
+            <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
+            <button type="button" className={`${styles.button} px-5 mx-1`}>Cart</button>
+          </div>
         </div>
-        <div className={`${styles.header__control}`}>
-          <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{user.name}</button>
-          <button type="button" className={`${styles.button} px-5 mx-1`}>Cart</button>
+        <div>
+          <ModalUser
+            isOpen={isModalUserInfoOpen}
+            closeModal={setIsModalUserInfoOpen}
+            userInfo={query.data}
+          />
         </div>
-      </div>
-      <div>
-        <ModalUser
-          isOpen={isModalUserInfoOpen}
-          closeModal={setIsModalUserInfoOpen}
-          userInfo={user}
-        />
-      </div>
-    </>
-  )
+      </>
+    )
+  }
+  return null
 }

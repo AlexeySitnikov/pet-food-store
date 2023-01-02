@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'
@@ -14,17 +14,33 @@ import styles from './mainPage.module.css'
 // }
 
 export function Main() {
-  const [products, setProducts] = useState([])
+  const GETPRODUCTS = ['GETPRODUCTS']
+  const getProducts = async () => {
+    const response = await fetch('https://api.react-learning.ru/products', {
+      method: 'GET',
+      headers: {
+        authorization: `${api.getToken()}`,
+      },
+    })
+    const responseArr = await response.json()
+    return responseArr.products
+  }
+  const query = useQuery({
+    queryKey: GETPRODUCTS,
+    queryFn: getProducts,
+  })
 
-  useEffect(() => {
-    api.getAllProducts().then((productsArr) => setProducts(productsArr))
-  }, [])
+  // надо сделать анимацию загрузки
+  if (query.isLoading) { return null }
 
-  return (
-    <div className="container">
-      <div className={`${styles.mainPage} justify-content-center align-items-center`}>
-        <ProductsList products={products} />
+  if (!query.isLoading) {
+    return (
+      <div className="container">
+        <div className={`${styles.mainPage} justify-content-center align-items-center`}>
+          <ProductsList products={query.data} />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+  return null
 }

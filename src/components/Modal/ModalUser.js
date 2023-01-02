@@ -19,7 +19,6 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
           }}
           validationSchema={Yup.object({})}
           onSubmit={() => {
-            console.log(userInfo.name)
             closeModal(!true)
           }}
         >

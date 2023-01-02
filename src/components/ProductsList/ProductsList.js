@@ -12,12 +12,6 @@ export function ProductsList({ products }) {
     console.log(e.target)
   }
 
-  // function asd(el) {
-  //   showCard()
-  //   // e.preventDefault()
-  //   console.log(el)
-  // }
-
   return (
     <>
       {
