@@ -31,6 +31,8 @@ class API {
   async getLogIn(email, password) {
     USER.email = email
     USER.password = password
+    console.log('from getLogin')
+    console.log({ USER })
     const response = await fetch('https://api.react-learning.ru/signin', {
       method: 'POST',
       headers: {
@@ -42,15 +44,22 @@ class API {
     localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
   }
 
-  async getAutorization() {
-    const response = await fetch('https://api.react-learning.ru/signin', {
+  // eslint-disable-next-line class-methods-use-this
+  async getAutorization(email, password, group) {
+    const userForAutorization = {
+      email,
+      password,
+      group,
+    }
+    const response = await fetch('https://api.react-learning.ru/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.USER),
+      body: JSON.stringify(userForAutorization),
     })
     const result = await response.json()
+    console.log(result)
     return result
   }
 

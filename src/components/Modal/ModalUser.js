@@ -11,18 +11,13 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
     <div className={isOpen ? `${styles.modal} ${styles.active}` : `${styles.modal}`}>
       <div className={isOpen ? `${styles.modal__content} ${styles.active}` : `${styles.modal__content}`}>
 
-        {/* <input type="text" name="name" value={`${userInfo.name}`} /> */}
         <img className="" src={`${userInfo.avatar}`} alt="Avatar" />
         <Formik
           initialValues={{
             name: userInfo.name,
             email: userInfo.email,
           }}
-          validationSchema={Yup.object(
-            {
-              // email: Yup.string().email('Invalid email address').required('email asd'),
-            },
-          )}
+          validationSchema={Yup.object({})}
           onSubmit={() => {
             console.log(userInfo.name)
             closeModal(!true)

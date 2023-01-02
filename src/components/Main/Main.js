@@ -22,7 +22,6 @@ export function Main() {
 
   return (
     <div className="container">
-      {/* <div className="d-flex"> */}
       <div className={`${styles.mainPage} justify-content-center align-items-center`}>
         <ProductsList products={products} />
       </div>
