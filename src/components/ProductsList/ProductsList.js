@@ -4,39 +4,18 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint no-underscore-dangle: 0 */
-import styles from './cardProduct.module.css'
+
+import { ProductItem } from '../ProductItem/ProductItem'
 
 export function ProductsList({ products }) {
-  const showCard = (e) => {
-    e.preventDefault()
-    console.log(e.target)
-  }
-
   return (
     <>
       {
-      products.map((el) => (
-        <div key={el._id} className={`${styles.product_item}`} onClick={showCard}>
-          <div className={`${styles.product_img}`}>
-            <a href="">
-              <img src={el.pictures} alt="Food" />
-            </a>
-          </div>
-          <div className={`${styles.product_list}`}>
-            <h3>{el.name}</h3>
-            <div className={`${styles.stars}`} />
-            <span className={`${styles.price}`}>{el.price}</span>
-            <div className={`${styles.actions}`}>
-              <div className={`${styles.add_to_cart}`}>
-                <a href="" className={`${styles.cart_button}`}>В корзину</a>
-              </div>
-              <div className={`${styles.add_to_links}`}>
-                <a href="" className={`${styles.wishlist}`} />
-                <a href="" className={`${styles.compare}`} />
-              </div>
-            </div>
-          </div>
-        </div>
+      products.map((product) => (
+        <ProductItem
+          key={product._id}
+          product={product}
+        />
 
         // <div key={el._id} className={`${styles.cardProduct}
         // card align-items-center align-middle`}>
