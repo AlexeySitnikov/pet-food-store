@@ -9,6 +9,7 @@ import { LogInPage } from './components/LogInPage/LogInPage'
 import { Main } from './components/Main/Main'
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 import { store } from './components/Redux/store'
+import { Cart } from './components/Cart/Cart'
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     path: 'login',
     element: <LogInPage />,
   },
+  {
+    path: 'cart',
+    element: <Cart />,
+  },
 ])
 
 const query = new QueryClient()
@@ -40,8 +45,6 @@ root.render(
       <React.StrictMode>
         <RouterProvider router={router} />
       </React.StrictMode>
-      ,
     </QueryClientProvider>
-    ,
   </Provider>,
 )

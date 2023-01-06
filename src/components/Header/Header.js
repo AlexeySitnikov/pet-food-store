@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../API/api'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
@@ -7,6 +8,7 @@ import logo from './Header_logo.jpg'
 
 export function Header() {
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
+  const navigate = useNavigate()
 
   const GETUSERINFO = ['GETUSERINFO']
   const getUserInfo = async () => {
@@ -29,6 +31,11 @@ export function Header() {
     setIsModalUserInfoOpen(true)
   }
 
+  const showCart = (e) => {
+    e.preventDefault()
+    navigate('cart')
+  }
+
   if (query.isLoading) { return null }
   if (!query.isLoading && !query.isError) {
     return (
@@ -39,7 +46,7 @@ export function Header() {
           </div>
           <div className={`${styles.header__control}`}>
             <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
-            <button type="button" className={`${styles.button} px-5 mx-1`}>Cart</button>
+            <button type="button" onClick={showCart} className={`${styles.button} px-5 mx-1`}>Cart</button>
           </div>
         </div>
         <div>

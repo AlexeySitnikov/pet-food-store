@@ -8,8 +8,8 @@ export const cartReducer = (state = initialState, action) => {
       return [...state, action.payload] }
     case REMOVEFROMCART: return null
     case CLEARCART: {
-      console.log({ state })
-      return state
+      // console.log({ state })
+      return []
     }
 
     default: return state

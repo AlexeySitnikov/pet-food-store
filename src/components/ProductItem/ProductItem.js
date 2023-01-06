@@ -6,7 +6,7 @@
 /* eslint-disable no-underscore-dangle */
 import { useDispatch } from 'react-redux'
 import styles from './cardProduct.module.css'
-import { addToCartAC, clearCartAC } from '../Redux/ActionCreators/cartAC'
+import { addToCartAC } from '../Redux/ActionCreators/cartAC'
 
 export function ProductItem({ product }) {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ export function ProductItem({ product }) {
     e.preventDefault()
     dispatch(addToCartAC(product._id))
     // вызов clearCartAC() необходим для проверки - просто выводится значение state
-    dispatch(clearCartAC())
+    // dispatch(clearCartAC())
   }
   return (
     <div key={product._id} className={`${styles.product_item}`} onClick={showCard}>
