@@ -7,9 +7,10 @@ export const addToCartAC = (id) => ({
   },
 })
 
-export const removeFromCartAC = () => ({
+export const removeFromCartAC = (id) => ({
   type: REMOVEFROMCART,
   payload: {
+    id,
   },
 })
 
