@@ -1,16 +1,21 @@
-// import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { decreaseProductAC, increaseProductAC } from '../Redux/ActionCreators/cartAC'
 
 export function CartItem({ idx, product }) {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const cart = useSelector((store) => store.cart)
 
-  const changeStatusTodoHandler = () => {
-    // dispatch()
+  const increaseProductQuantityHandler = () => {
+    // console.log(product)
+    dispatch(increaseProductAC(product))
   }
 
-  const deleteTodoHandler = () => {
-    // dispatch()
+  const decreaseProductQuantityHandler = () => {
+    dispatch(decreaseProductAC(product))
+    console.log({ cart })
   }
-  console.log(product.id)
+  // console.log(product.id)
   return (
     <li className="list-group-item d-flex justify-content-between">
       <div className="d-flex align-items-center">
@@ -26,8 +31,12 @@ export function CartItem({ idx, product }) {
         </span>
       </div>
       <div>
-        <button onClick={changeStatusTodoHandler} type="button" className="btn mx-2 btn-success">Done</button>
-        <button onClick={deleteTodoHandler} type="button" className="btn btn-danger">Delete</button>
+        <button onClick={increaseProductQuantityHandler} type="button" className="btn mx-2 btn-success">+</button>
+        <span>
+          {`${product.quantityToBuy}`}
+          {'       '}
+        </span>
+        <button onClick={decreaseProductQuantityHandler} type="button" className="btn btn-danger">-</button>
       </div>
     </li>
   )

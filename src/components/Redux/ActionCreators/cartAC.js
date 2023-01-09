@@ -1,9 +1,13 @@
-import { ADDTOCART, REMOVEFROMCART, CLEARCART } from '../Types/cartTypes'
+/* eslint-disable no-underscore-dangle */
+import {
+  ADDTOCART, REMOVEFROMCART, CLEARCART, INCREASEPRODUCTQUANTITY, DECREASEPRODUCTQUANTITY,
+} from '../Types/cartTypes'
 
-export const addToCartAC = (id) => ({
+export const addToCartAC = (product) => ({
   type: ADDTOCART,
   payload: {
-    id,
+    id: product._id,
+    quantityToBuy: 1,
   },
 })
 
@@ -17,5 +21,19 @@ export const removeFromCartAC = (id) => ({
 export const clearCartAC = () => ({
   type: CLEARCART,
   payload: {
+  },
+})
+
+export const increaseProductAC = (product) => ({
+  type: INCREASEPRODUCTQUANTITY,
+  payload: {
+    id: product.id,
+  },
+})
+
+export const decreaseProductAC = (product) => ({
+  type: DECREASEPRODUCTQUANTITY,
+  payload: {
+    id: product.id,
   },
 })

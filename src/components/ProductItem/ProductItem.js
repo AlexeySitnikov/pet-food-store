@@ -12,7 +12,7 @@ export function ProductItem({ product }) {
   const dispatch = useDispatch()
   const showCard = (e) => {
     e.preventDefault()
-    dispatch(addToCartAC(product._id))
+    dispatch(addToCartAC(product))
     // вызов clearCartAC() необходим для проверки - просто выводится значение state
     // dispatch(clearCartAC())
   }
