@@ -27,6 +27,28 @@ class API {
     return productsList.products
   }
 
+  // async getProductsById(id) {
+  //   const responce = await fetch(`https://api.react-learning.ru/products/${id}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       authorization: `${this.getToken()}`,
+  //     },
+  //   })
+  //   const product = await responce.json()
+  //   // console.log({ product })
+  //   return product
+  // }
+
+  async getProductsById(ids) {
+    return Promise.all(ids.map((id) => fetch(`https://api.react-learning.ru/products/${id}`, {
+      method: 'GET',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
+    })
+      .then((res) => res.json())))
+  }
+
   // eslint-disable-next-line class-methods-use-this
   async getLogIn(email, password) {
     USER.email = email

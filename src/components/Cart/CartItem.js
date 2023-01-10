@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
 
 import { decreaseProductAC, increaseProductAC } from '../Redux/ActionCreators/cartAC'
@@ -15,7 +16,8 @@ export function CartItem({ idx, product }) {
     dispatch(decreaseProductAC(product))
     console.log({ cart })
   }
-  // console.log(product.id)
+  // console.log(product)
+
   return (
     <li className="list-group-item d-flex justify-content-between">
       <div className="d-flex align-items-center">
