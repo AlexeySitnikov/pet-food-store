@@ -27,19 +27,7 @@ class API {
     return productsList.products
   }
 
-  // async getProductsById(id) {
-  //   const responce = await fetch(`https://api.react-learning.ru/products/${id}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       authorization: `${this.getToken()}`,
-  //     },
-  //   })
-  //   const product = await responce.json()
-  //   // console.log({ product })
-  //   return product
-  // }
-
-  async getProductsById(ids) {
+  async getProductsByIds(ids) {
     return Promise.all(ids.map((id) => fetch(`https://api.react-learning.ru/products/${id}`, {
       method: 'GET',
       headers: {

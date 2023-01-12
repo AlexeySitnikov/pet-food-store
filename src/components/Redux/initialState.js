@@ -1,6 +1,5 @@
-export const initialState = {
-  cart: [],
-  token: '',
+export const initialCart = {
+  products: [],
 }
 
-export const getInitialState = () => initialState
+export const getInitialState = () => initialCart

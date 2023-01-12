@@ -52,7 +52,7 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
 
             <Field name="password" placeholder="Password" type="password" />
 
-            <button type="submit" className="btn btn-primary">Autorized</button>
+            <button type="submit" className="btn btn-primary">Register</button>
           </Form>
         </Formik>
       </div>

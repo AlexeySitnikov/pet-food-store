@@ -1,22 +1,23 @@
 /* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
-
-import { decreaseProductAC, increaseProductAC } from '../Redux/ActionCreators/cartAC'
+import { decreaseProductsQuantity, increacreProductQuantity } from '../Redux/Slices/productsSlice/productsSlice'
 
 export function CartItem({ idx, product }) {
   const dispatch = useDispatch()
-  const cart = useSelector((store) => store.cart)
+  const cart = useSelector((store) => store.products)
+  const currentProduct = cart.find((item) => item.id === product._id)
 
   const increaseProductQuantityHandler = () => {
-    // console.log(product)
-    dispatch(increaseProductAC(product))
+    if (currentProduct.quantityToBuy < product.stock) {
+      dispatch(increacreProductQuantity(product))
+    }
   }
 
   const decreaseProductQuantityHandler = () => {
-    dispatch(decreaseProductAC(product))
-    console.log({ cart })
+    if (currentProduct.quantityToBuy > 1) {
+      dispatch(decreaseProductsQuantity(product))
+    }
   }
-  // console.log(product)
 
   return (
     <li className="list-group-item d-flex justify-content-between">
@@ -26,16 +27,15 @@ export function CartItem({ idx, product }) {
           .
           {' '}
         </span>
-        {/* <span className={`${status ? styles.done : ''}`}> */}
         <span>
-          {product.id}
+          {product.name}
           {' '}
         </span>
       </div>
       <div>
         <button onClick={increaseProductQuantityHandler} type="button" className="btn mx-2 btn-success">+</button>
         <span>
-          {`${product.quantityToBuy}`}
+          {`${currentProduct.quantityToBuy}`}
           {'       '}
         </span>
         <button onClick={decreaseProductQuantityHandler} type="button" className="btn btn-danger">-</button>

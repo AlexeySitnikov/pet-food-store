@@ -1,9 +1,8 @@
-import { createStore } from 'redux'
-import { getInitialState } from './initialState'
-import { rootReducer } from './Reducers/rootReducer'
+import { configureStore } from '@reduxjs/toolkit'
+import { productsReducer } from './Slices/productsSlice/productsSlice'
 
-export const store = createStore(rootReducer, getInitialState())
-
-// store.subscribe(() => {
-//   localStorage.setItem('asd', JSON.stringify(store.getState()))
-// })
+export const store = configureStore({
+  reducer: {
+    products: productsReducer,
+  },
+})

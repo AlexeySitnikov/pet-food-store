@@ -36,7 +36,7 @@ export function LogInPage() {
           <hr />
           <div className="text-center">
             <button onClick={logInBtn} type="button" className="btn btn-warning mx-2">Login</button>
-            <button onClick={autorizationBtn} type="button" className="btn btn-warning mx-2">Autorization</button>
+            <button onClick={autorizationBtn} type="button" className="btn btn-warning mx-2">Register</button>
           </div>
         </div>
       </div>

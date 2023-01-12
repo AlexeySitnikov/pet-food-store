@@ -1,4 +1,4 @@
-// import { useEffect } from 'react'
+/* eslint-disable no-unused-vars */
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { api } from '../API/api'
@@ -7,25 +7,14 @@ import { CartItem } from './CartItem'
 import { ClearCartButton } from './ClearCartButton'
 
 export function Cart() {
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch()
-  // }, [dispatch])
-
-  const cart = useSelector((store) => store.cart)
-  const { data: products } = useQuery({
-    queryKey: cart,
-    queryFn: () => api.getProductsById(cart.map((product) => product.id)),
+  const cart = useSelector((store) => store.products)
+  const { data: productsFromQuery } = useQuery({
+    queryKey: ['Products'],
+    queryFn: () => api.getProductsByIds(cart.map((product) => product.id)),
   })
-  // Promise.all(cart.map((item) => (api.getProductsById(item.id))))
-  //   .then((value) => {
-  //     // eslint-disable-next-line guard-for-in, no-restricted-syntax
-  //     value.forEach((element) => {
-  //       console.log({ element })
-  //     })
-  //   })
-  console.log(products)
-  if (!cart.length) {
+  const products = productsFromQuery ?? []
+
+  if (!products.length) {
     return (
       <>
         <p>Cart is empty...</p>
@@ -38,9 +27,9 @@ export function Cart() {
     <>
       <ul className="list-group">
         {
-          cart.map((cartItem, i) => (
+          products.map((cartItem, i) => (
             <CartItem
-              key={cartItem.id}
+              key={crypto.randomUUID()}
               product={cartItem}
               idx={i}
             />

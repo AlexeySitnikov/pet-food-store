@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux'
-import { clearCartAC } from '../Redux/ActionCreators/cartAC'
+import { clearCart } from '../Redux/Slices/productsSlice/productsSlice'
 
 export function ClearCartButton() {
   const dispatch = useDispatch()
-  const clearCart = (e) => {
+  const clearCartHandler = (e) => {
     e.preventDefault()
-    dispatch(clearCartAC())
+    dispatch(clearCart())
   }
 
   return (
-    <button onClick={clearCart} type="button" className="btn mx-2 btn-success">Clear cart</button>
+    <button onClick={clearCartHandler} type="button" className="btn mx-2 btn-success">Clear cart</button>
   )
 }

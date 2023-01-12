@@ -1,20 +1,18 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useDispatch } from 'react-redux'
 import styles from './cardProduct.module.css'
-import { addToCartAC } from '../Redux/ActionCreators/cartAC'
+import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
 
 export function ProductItem({ product }) {
   const dispatch = useDispatch()
   const showCard = (e) => {
     e.preventDefault()
-    dispatch(addToCartAC(product))
-    // вызов clearCartAC() необходим для проверки - просто выводится значение state
-    // dispatch(clearCartAC())
+    dispatch(addToCart(product))
   }
   return (
     <div key={product._id} className={`${styles.product_item}`} onClick={showCard}>
