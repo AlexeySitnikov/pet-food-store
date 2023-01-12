@@ -10,16 +10,14 @@ import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
 
 export function ProductItem({ product }) {
   const dispatch = useDispatch()
-  const showCard = (e) => {
+  const addToCartHandler = (e) => {
     e.preventDefault()
     dispatch(addToCart(product))
   }
   return (
-    <div key={product._id} className={`${styles.product_item}`} onClick={showCard}>
+    <div className={`${styles.product_item}`}>
       <div className={`${styles.product_img}`}>
-        <a href="">
-          <img src={product.pictures} alt="Food" />
-        </a>
+        <img src={product.pictures} alt="Food" />
       </div>
       <div className={`${styles.product_list}`}>
         <h3>{product.name}</h3>
@@ -27,7 +25,9 @@ export function ProductItem({ product }) {
         <span className={`${styles.price}`}>{product.price}</span>
         <div className={`${styles.actions}`}>
           <div className={`${styles.add_to_cart}`}>
-            <a href="" className={`${styles.cart_button}`}>В корзину</a>
+            <button type="button" className={`${styles.cart_button}`} onClick={addToCartHandler}>
+              В корзину
+            </button>
           </div>
           <div className={`${styles.add_to_links}`}>
             <a href="" className={`${styles.wishlist}`} />

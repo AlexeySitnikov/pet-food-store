@@ -1,20 +1,17 @@
 .cardProduct{
-height:400px;
+height:600px;
 }
-
-img{
-
-}
-
 
 * {
   box-sizing: border-box;
 }
 .product_item {
   width: 300px;
+  height: 350px;
   margin: 0 auto;
   padding: 10px 10px 5px 10px;
   border: 1px solid #eee;
+  border-radius: 10px;
   background: white;
   font-family: "Open Sans";
   overflow: hidden;
@@ -28,7 +25,7 @@ img{
 }
 .product_img img {
   display: block;
-  width: 100%;
+  width: 50%;
 }
 .product_list {
   margin-top: 15px;
@@ -51,11 +48,11 @@ img{
   line-height: 14px;
   margin: 7px 0;
 }
-.stars:before {
+.stars::before {
+  font-family: FontAwesome;
   content: "\f005\f005\f005\f005\f006";
   color: #EFB71C;
   font-size: 14px;
-  font-family: FontAwesome;
 }
 .actions {
   border-top: 1px solid #eee;
@@ -64,7 +61,7 @@ img{
   height: 30px;
   line-height: 30px;
 }
-.actions:after {
+.actions::after {
   content: "";
   display: table;
   clear: both;
@@ -74,14 +71,17 @@ img{
 }
 .cart_button {
   text-decoration: none;
-  color: #8C877C;
+  background-color: #23a030;
+  color: #fff;
   padding-right: 20px;
   border-right: 1px solid #ddd;
   transition: .4s linear;
 }
 .cart_button:before {
-  content: "\f07a";
-  font-family: FontAwesome;
+
+  font-family: "Font Awesome 5 Free";
+  content: "\f007";
+  font-weight: 900; 
   margin-right: 10px;
 }
 .add_to_cart:hover .cart_button, .wishlist:hover, .compare:hover {
@@ -92,14 +92,14 @@ img{
   padding-left: 20px;
   transition: .4s linear;
 }
-.wishlist:after, .compare:after {
+.wishlist::after, .compare::after {
   display: inline-block;
   font-family: FontAwesome;
   font-size: 13px;
 }
-.wishlist:after {
+.wishlist::after {
   content: "\f004";
 }
-.compare:after {
+.compare::after {
   content: "\f079";
 }
