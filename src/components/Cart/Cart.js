@@ -9,7 +9,7 @@ import { ClearCartButton } from './ClearCartButton'
 export function Cart() {
   const cart = useSelector((store) => store.products)
   const { data: productsFromQuery } = useQuery({
-    queryKey: ['Products'].concat(cart),
+    queryKey: ['Products'].concat(cart.map((item) => item.id)),
     queryFn: () => api.getProductsByIds(cart.map((product) => product.id)),
   })
   const products = productsFromQuery ?? []
