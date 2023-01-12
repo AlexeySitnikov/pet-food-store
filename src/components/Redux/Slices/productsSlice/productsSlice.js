@@ -20,9 +20,10 @@ export const productsSlice = createSlice({
     },
 
     removeFromCart: (state, action) => {
-      const currentProduct = state.findIndex((product) => product.id === action.payload._id)
-      if (currentProduct !== -1) {
-        state.slice(currentProduct, 1)
+      const currenProductIndex = state.findIndex((product) => product.id === action.payload._id)
+      console.log(action.payload.name)
+      if (currenProductIndex !== -1) {
+        state.splice(currenProductIndex, 1)
       }
     },
 

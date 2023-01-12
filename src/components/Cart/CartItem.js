@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
-import { decreaseProductsQuantity, increacreProductQuantity } from '../Redux/Slices/productsSlice/productsSlice'
+import { decreaseProductsQuantity, increacreProductQuantity, removeFromCart } from '../Redux/Slices/productsSlice/productsSlice'
+import trash from './trash.png'
 
 export function CartItem({ idx, product }) {
   const dispatch = useDispatch()
@@ -19,6 +20,10 @@ export function CartItem({ idx, product }) {
     }
   }
 
+  const revoveFromCartHandler = () => {
+    dispatch(removeFromCart(product))
+  }
+  console.log({ product })
   return (
     <li className="list-group-item d-flex justify-content-between">
       <div className="d-flex align-items-center">
@@ -27,18 +32,29 @@ export function CartItem({ idx, product }) {
           .
           {' '}
         </span>
+        <div>
+          {/* <img src={product.pictures} alt="Food" /> */}
+
+        </div>
         <span>
           {product.name}
           {' '}
         </span>
       </div>
-      <div>
-        <button onClick={increaseProductQuantityHandler} type="button" className="btn mx-2 btn-success">+</button>
-        <span>
-          {`${currentProduct.quantityToBuy}`}
-          {'       '}
-        </span>
-        <button onClick={decreaseProductQuantityHandler} type="button" className="btn btn-danger">-</button>
+      <div className="">
+        <div className="flex-column justify-content-end  mx-5">
+          <div>
+            <button onClick={increaseProductQuantityHandler} type="button" className="btn mx-2 btn-success">+</button>
+            <span>
+              {`${currentProduct.quantityToBuy}`}
+              {'     '}
+            </span>
+            <button onClick={decreaseProductQuantityHandler} type="button" className="btn btn-danger">-</button>
+            <button onClick={revoveFromCartHandler} type="button" className="btn btn-outline-light"><img src={`${trash}`} alt="trash" /></button>
+
+          </div>
+          <span className="">{`in stock ${product.stock}`}</span>
+        </div>
       </div>
     </li>
   )

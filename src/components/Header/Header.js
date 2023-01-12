@@ -5,6 +5,7 @@ import { api } from '../API/api'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
+import cart from './cart.png'
 
 export function Header() {
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
@@ -46,7 +47,13 @@ export function Header() {
           </div>
           <div className={`${styles.header__control}`}>
             <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
-            <button type="button" onClick={showCart} className={`${styles.button} px-5 mx-1`}>Cart</button>
+
+            <button type="button" onClick={showCart} className={`${styles.button} px-5 mx-1`}>
+              Cart
+              {' '}
+              <img src={`${cart}`} alt="cart" />
+            </button>
+
           </div>
         </div>
         <div>
