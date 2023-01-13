@@ -20,22 +20,21 @@ export function Header() {
   const debounceValue = useDebounce(input, 300)
 
   useEffect(() => {
-    setSearchParams({ q: input })
+    setSearchParams({ query: input })
   }, [input])
 
   const GETSEARCHPRODUCTBYNAME = [''].concat(debounceValue)
+  // console.log(GETSEARCHPRODUCTBYNAME)
   const getSearchProductByName = async () => {
-    if (debounceValue !== '') {
-      const responce = await fetch(`https://api.react-learning.ru/products/search?query=${debounceValue}`, {
-        method: 'GET',
-        headers: {
-          authorization: `${api.getToken()}`,
-        },
-      })
-      const result = await responce.json()
-      console.log(result)
-      return result
-    } return null
+    const responce = await fetch(`https://api.react-learning.ru/products/search?query=${debounceValue}`, {
+      method: 'GET',
+      headers: {
+        authorization: `${api.getToken()}`,
+      },
+    })
+    const result = await responce.json()
+    // console.log(result)
+    return result
   }
 
   useEffect(() => {
