@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { useSelector } from 'react-redux'
 import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'
@@ -14,6 +15,8 @@ import styles from './mainPage.module.css'
 // }
 
 export function Main() {
+const searchProducts =  useSelector((store) => store.productsNameToSearch)
+
   const GETPRODUCTS = ['GETPRODUCTS']
   const getProducts = async () => {
     const response = await fetch('https://api.react-learning.ru/products', {
@@ -29,6 +32,8 @@ export function Main() {
     queryKey: GETPRODUCTS,
     queryFn: getProducts,
   })
+
+  console.log({searchProducts})
 
   // надо сделать анимацию загрузки
   if (query.isLoading) { return null }

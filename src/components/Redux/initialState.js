@@ -1,6 +1,6 @@
 export const initialCart = {
   products: [],
-  productsNameToSearch: [],
+  productsNameToSearch: '',
 }
 
 export const getInitialState = () => initialCart

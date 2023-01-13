@@ -9,15 +9,20 @@ import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
 import cart from './cart.png'
 import { useDebounce } from '../hooks/useDebounce'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeProductNameForSearch } from '../Redux/Slices/searchProductByNameSlice/searchProductByNameSlice'
 
 export function Header() {
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
   const navigate = useNavigate()
+  const searchProducts = useSelector((store) => store.productsNameToSearch)
+  const dispatch = useDispatch()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const [input, setInput] = useState(() => searchParams.get('query') ?? '')
   // const { setSearch } = useFilterCntextMethods()
   const debounceValue = useDebounce(input, 300)
+  dispatch(changeProductNameForSearch(debounceValue))
 
   useEffect(() => {
     setSearchParams({ query: input })
