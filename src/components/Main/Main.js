@@ -15,16 +15,25 @@ import styles from './mainPage.module.css'
 // }
 
 export function Main() {
-const searchProducts =  useSelector((store) => store.productsNameToSearch)
+  const searchProducts = useSelector((store) => store.productsNameToSearch)
+  let GETPRODUCTS = []
+  let url = ''
+  if (searchProducts.length) {
+    GETPRODUCTS = ['GETPRODUCTS'].concat(searchProducts)
+    url = 'https://api.react-learning.ru/products/search?query='.concat(searchProducts)
+  } else {
+    GETPRODUCTS = ['GETPRODUCTS']
+    url = 'https://api.react-learning.ru/products'
+  }
 
-  const GETPRODUCTS = ['GETPRODUCTS']
   const getProducts = async () => {
-    const response = await fetch('https://api.react-learning.ru/products', {
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         authorization: `${api.getToken()}`,
       },
     })
+    console.log(response)
     const responseArr = await response.json()
     return responseArr.products
   }
@@ -33,10 +42,11 @@ const searchProducts =  useSelector((store) => store.productsNameToSearch)
     queryFn: getProducts,
   })
 
-  console.log({searchProducts})
-
   // надо сделать анимацию загрузки
   if (query.isLoading) { return null }
+  if (!query.data) {
+    return <p>not found</p>
+  }
 
   if (!query.isLoading) {
     return (

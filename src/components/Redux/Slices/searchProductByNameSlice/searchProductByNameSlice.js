@@ -6,13 +6,13 @@ export const searchProductByNameSlice = createSlice({
   initialState: initialCart.productsNameToSearch,
   reducers: {
     changeProductNameForSearch(state, action) {
-      state = action.payload
+      return action.payload
     },
   },
 })
 
 export const {
-  changeProductNameForSearch
+  changeProductNameForSearch,
 } = searchProductByNameSlice.actions
 
 export const searchProductsByNameReducer = searchProductByNameSlice.reducer

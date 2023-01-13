@@ -3,19 +3,20 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { api } from '../API/api'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
 import cart from './cart.png'
 import { useDebounce } from '../hooks/useDebounce'
-import { useDispatch, useSelector } from 'react-redux'
 import { changeProductNameForSearch } from '../Redux/Slices/searchProductByNameSlice/searchProductByNameSlice'
 
 export function Header() {
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
   const navigate = useNavigate()
-  const searchProducts = useSelector((store) => store.productsNameToSearch)
+  // eslint-disable-next-line no-unused-vars
+  // const searchProducts = useSelector((store) => store.productsNameToSearch)
   const dispatch = useDispatch()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -28,29 +29,29 @@ export function Header() {
     setSearchParams({ query: input })
   }, [input])
 
-  const GETSEARCHPRODUCTBYNAME = [''].concat(debounceValue)
+  // const GETSEARCHPRODUCTBYNAME = [''].concat(debounceValue)
   // console.log(GETSEARCHPRODUCTBYNAME)
-  const getSearchProductByName = async () => {
-    const responce = await fetch(`https://api.react-learning.ru/products/search?query=${debounceValue}`, {
-      method: 'GET',
-      headers: {
-        authorization: `${api.getToken()}`,
-      },
-    })
-    const result = await responce.json()
-    // console.log(result)
-    return result
-  }
+  // const getSearchProductByName = async () => {
+  // const responce = await fetch(`https://api.react-learning.ru/products/search?query=${debounceValue}`, {
+  // method: 'GET',
+  // headers: {
+  // authorization: `${api.getToken()}`,
+  // },
+  // })
+  // const result = await responce.json()
+  // console.log(result)
+  // return result
+  // }
 
-  useEffect(() => {
-    getSearchProductByName(debounceValue)
-  }, [debounceValue])
+  // useEffect(() => {
+  // getSearchProductByName(debounceValue)
+  // }, [debounceValue])
 
   // eslint-disable-next-line no-unused-vars
-  const querySearchProductByName = useQuery({
-    queryKey: GETSEARCHPRODUCTBYNAME,
-    queryFn: getSearchProductByName,
-  })
+  // const querySearchProductByName = useQuery({
+  // queryKey: GETSEARCHPRODUCTBYNAME,
+  // queryFn: getSearchProductByName,
+  // })
 
   const GETUSERINFO = ['GETUSERINFO']
   const getUserInfo = async () => {
