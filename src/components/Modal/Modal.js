@@ -22,9 +22,18 @@ export function Modal({ isOpen, closeModal }) {
     enabled: false,
   })
 
+  const closeModalHandler = () => {
+    closeModal(!true)
+  }
+
   const navigate = useNavigate()
   return (
     <div className={isOpen ? `${styles.modal} ${styles.active}` : `${styles.modal}`}>
+      <div className={`${styles.buttonClose}`}>
+        <button onClick={closeModalHandler} type="button" className="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <div className={isOpen ? `${styles.modal__content} ${styles.active}` : `${styles.modal__content}`}>
         <Formik
           initialValues={{
