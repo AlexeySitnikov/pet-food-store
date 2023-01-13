@@ -4,5 +4,6 @@ import { productsReducer } from './Slices/productsSlice/productsSlice'
 export const store = configureStore({
   reducer: {
     products: productsReducer,
+    productsNameToSearch: productsNameToSearchReducer,
   },
 })
