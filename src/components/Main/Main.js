@@ -33,8 +33,10 @@ export function Main() {
         authorization: `${api.getToken()}`,
       },
     })
-    console.log(response)
     const responseArr = await response.json()
+    if (searchProducts.length) {
+      return responseArr
+    }
     return responseArr.products
   }
   const query = useQuery({
