@@ -1,6 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
-import { decreaseProductsQuantity, increacreProductQuantity, removeFromCart } from '../Redux/Slices/productsSlice/productsSlice'
+import {
+  decreaseProductsQuantity, increacreProductQuantity, removeFromCart, checkWantToBuy,
+} from '../Redux/Slices/productsSlice/productsSlice'
 import trash from './trash.png'
 
 export function CartItem({ idx, product }) {
@@ -23,23 +25,36 @@ export function CartItem({ idx, product }) {
   const revoveFromCartHandler = () => {
     dispatch(removeFromCart(product))
   }
-  console.log({ product })
+
+  const checkWantToBuyHandler = () => {
+    dispatch(checkWantToBuy(product))
+  }
+
   return (
     <li className="list-group-item d-flex justify-content-between">
       <div className="d-flex align-items-center">
-        <span className="me-4">
-          {idx + 1}
-          .
-          {' '}
-        </span>
-        <div>
-          {/* <img src={product.pictures} alt="Food" /> */}
+        <label htmlFor={currentProduct.id}>
+          <input
+            id={currentProduct.id}
+            name="Product"
+            type="checkbox"
+            checked={currentProduct.wantToBuy}
+            onChange={checkWantToBuyHandler}
+          />
+          <span className="me-4">
+            {idx + 1}
+            .
+            {' '}
+          </span>
+          <div>
+            {/* <img src={product.pictures} alt="Food" /> */}
 
-        </div>
-        <span>
-          {product.name}
-          {' '}
-        </span>
+          </div>
+          <span>
+            {product.name}
+            {' '}
+          </span>
+        </label>
       </div>
       <div className="">
         <div className="flex-column justify-content-end  mx-5">
@@ -47,6 +62,7 @@ export function CartItem({ idx, product }) {
             <button onClick={increaseProductQuantityHandler} type="button" className="btn mx-2 btn-success">+</button>
             <span>
               {`${currentProduct.quantityToBuy}`}
+              {/* {console.log(currentProduct.quantityToBuy)} */}
               {'     '}
             </span>
             <button onClick={decreaseProductQuantityHandler} type="button" className="btn btn-danger">-</button>

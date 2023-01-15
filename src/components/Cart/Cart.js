@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
@@ -5,6 +6,7 @@ import { api } from '../API/api'
 import { BackButton } from './BackButton'
 import { CartItem } from './CartItem'
 import { ClearCartButton } from './ClearCartButton'
+import { MakeAnOrderButton } from './MakeAnOrderButton'
 
 export function Cart() {
   const cart = useSelector((store) => store.products)
@@ -14,6 +16,12 @@ export function Cart() {
   })
   const products = productsFromQuery ?? []
 
+  const productsToBuy = products.filter(
+    (product) => cart.findIndex(
+      (productFromCart) => (productFromCart.id === product._id && productFromCart.wantToBuy),
+    ) !== -1,
+  )
+  console.log({ productsToBuy })
   if (!products.length) {
     return (
       <>
@@ -38,6 +46,7 @@ export function Cart() {
       </ul>
       <BackButton />
       <ClearCartButton />
+      {/* <MakeAnOrderButton products={productsToBuy} /> */}
     </>
   )
 }

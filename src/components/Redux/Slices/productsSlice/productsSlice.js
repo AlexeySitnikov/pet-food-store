@@ -14,16 +14,17 @@ export const productsSlice = createSlice({
         const product = {
           id: action.payload._id,
           quantityToBuy: 1,
+          wantToBuy: false,
         }
         state.push(product)
       }
     },
 
     removeFromCart: (state, action) => {
-      const currenProductIndex = state.findIndex((product) => product.id === action.payload._id)
-      console.log(action.payload.name)
-      if (currenProductIndex !== -1) {
-        state.splice(currenProductIndex, 1)
+      const currentProductIndex = state.findIndex((product) => product.id === action.payload._id)
+      // console.log(action.payload.name)
+      if (currentProductIndex !== -1) {
+        state.splice(currentProductIndex, 1)
       }
     },
 
@@ -41,6 +42,10 @@ export const productsSlice = createSlice({
         currentProduct.quantityToBuy -= 1
       }
     },
+    checkWantToBuy: (state, action) => {
+      const currentProduct = state.find((product) => product.id === action.payload._id)
+      currentProduct.wantToBuy = !currentProduct.wantToBuy
+    },
   },
 })
 
@@ -50,6 +55,7 @@ export const {
   clearCart,
   increacreProductQuantity,
   decreaseProductsQuantity,
+  checkWantToBuy,
 } = productsSlice.actions
 
 export const productsReducer = productsSlice.reducer
