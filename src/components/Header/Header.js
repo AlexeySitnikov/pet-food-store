@@ -17,6 +17,7 @@ export function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const token = useSelector((store) => store.token)
+  const products = useSelector((store) => store.products)
 
   const [searchParams, setSearchParams] = useSearchParams()
   const [input, setInput] = useState(() => searchParams.get('query') ?? '')
@@ -72,16 +73,18 @@ export function Header() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
-              <button type="submit" onSubmit={searchProductHandler}></button>
+              <button type="submit" onSubmit={searchProductHandler}>Искать</button>
             </form>
           </div>
           <div className={`${styles.header__control}`}>
             <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
 
             <button type="button" onClick={showCart} className={`${styles.button} px-5 mx-1`}>
-              Cart
-              {' '}
-              <img src={`${cart}`} alt="cart" />
+              <div>
+                Cart
+                <img src={`${cart}`} alt="cart" />
+                <span className={`${styles.numberCircle}`}>{`${products.length}`}</span>
+              </div>
             </button>
 
           </div>
