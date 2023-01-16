@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-import { api } from '../API/api'
+// import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'
 
@@ -16,6 +16,8 @@ import styles from './mainPage.module.css'
 
 export function Main() {
   const searchProducts = useSelector((store) => store.productsNameToSearch)
+  const token = useSelector((store) => store.token)
+
   let GETPRODUCTS = []
   let url = ''
   if (searchProducts.length) {
@@ -30,7 +32,7 @@ export function Main() {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        authorization: `${api.getToken()}`,
+        authorization: token,
       },
     })
     const responseArr = await response.json()

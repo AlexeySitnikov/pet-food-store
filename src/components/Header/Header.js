@@ -3,8 +3,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { api } from '../API/api'
+import { useDispatch, useSelector } from 'react-redux'
+// import { api } from '../API/api'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
@@ -15,13 +15,11 @@ import { changeProductNameForSearch } from '../Redux/Slices/searchProductByNameS
 export function Header() {
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
   const navigate = useNavigate()
-  // eslint-disable-next-line no-unused-vars
-  // const searchProducts = useSelector((store) => store.productsNameToSearch)
   const dispatch = useDispatch()
+  const token = useSelector((store) => store.token)
 
   const [searchParams, setSearchParams] = useSearchParams()
   const [input, setInput] = useState(() => searchParams.get('query') ?? '')
-  // const { setSearch } = useFilterCntextMethods()
   const debounceValue = useDebounce(input, 300)
   dispatch(changeProductNameForSearch(debounceValue))
 
@@ -29,36 +27,12 @@ export function Header() {
     setSearchParams({ query: input })
   }, [input])
 
-  // const GETSEARCHPRODUCTBYNAME = [''].concat(debounceValue)
-  // console.log(GETSEARCHPRODUCTBYNAME)
-  // const getSearchProductByName = async () => {
-  // const responce = await fetch(`https://api.react-learning.ru/products/search?query=${debounceValue}`, {
-  // method: 'GET',
-  // headers: {
-  // authorization: `${api.getToken()}`,
-  // },
-  // })
-  // const result = await responce.json()
-  // console.log(result)
-  // return result
-  // }
-
-  // useEffect(() => {
-  // getSearchProductByName(debounceValue)
-  // }, [debounceValue])
-
-  // eslint-disable-next-line no-unused-vars
-  // const querySearchProductByName = useQuery({
-  // queryKey: GETSEARCHPRODUCTBYNAME,
-  // queryFn: getSearchProductByName,
-  // })
-
   const GETUSERINFO = ['GETUSERINFO']
   const getUserInfo = async () => {
     const responce = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
       method: 'GET',
       headers: {
-        authorization: `${api.getToken()}`,
+        authorization: token,
       },
     })
     const result = await responce.json()
@@ -82,7 +56,6 @@ export function Header() {
   const searchProductHandler = () => {
     // querySearchProductByName(debounceValue)
   }
-
   if (query.isLoading) { return null }
   if (!query.isLoading && !query.isError) {
     return (
