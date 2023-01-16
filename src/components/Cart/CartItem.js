@@ -59,13 +59,13 @@ export function CartItem({ idx, product }) {
       <div className="">
         <div className="flex-column justify-content-end  mx-5">
           <div>
-            <button onClick={increaseProductQuantityHandler} type="button" className="btn mx-2 btn-success">+</button>
+            <button onClick={increaseProductQuantityHandler} type="button" className={`btn mx-2 ${currentProduct.quantityToBuy < product.stock ? 'btn-success' : 'btn-secondary'}`}>+</button>
             <span>
               {`${currentProduct.quantityToBuy}`}
               {/* {console.log(currentProduct.quantityToBuy)} */}
               {'     '}
             </span>
-            <button onClick={decreaseProductQuantityHandler} type="button" className="btn btn-danger">-</button>
+            <button onClick={decreaseProductQuantityHandler} type="button" className={`btn mx-2 ${currentProduct.quantityToBuy > 1 ? 'btn-danger' : 'btn-secondary'}`}>-</button>
             <button onClick={revoveFromCartHandler} type="button" className="btn btn-outline-light"><img src={`${trash}`} alt="trash" /></button>
 
           </div>
