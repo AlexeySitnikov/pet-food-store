@@ -16,12 +16,21 @@ export function Cart() {
   })
   const products = productsFromQuery ?? []
 
+  // фунция filter возвращает массив, в котором только эл-менты из корзины
+  // (которые нужны для покупки).
+  // функция map, создается новый массив, в котором все элементы и их кол-во для покупки
   const productsToBuy = products.filter(
     (product) => cart.findIndex(
       (productFromCart) => (productFromCart.id === product._id && productFromCart.wantToBuy),
     ) !== -1,
-  )
-  console.log({ productsToBuy })
+  ).map((product) => {
+    const currentProduct = cart.find((productFromCart) => productFromCart.id === product._id)
+    return ({
+      ...product,
+      quantityToBuy: currentProduct.quantityToBuy,
+    })
+  })
+
   if (!products.length) {
     return (
       <>
@@ -46,7 +55,7 @@ export function Cart() {
       </ul>
       <BackButton />
       <ClearCartButton />
-      {/* <MakeAnOrderButton products={productsToBuy} /> */}
+      <MakeAnOrderButton products={productsToBuy} />
     </>
   )
 }

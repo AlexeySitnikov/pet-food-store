@@ -10,6 +10,7 @@ import { Main } from './components/Main/Main'
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 import { store } from './components/Redux/store'
 import { Cart } from './components/Cart/Cart'
+import { Order } from './components/Order/Order'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: 'cart',
     element: <Cart />,
+  },
+  {
+    path: 'order',
+    element: <Order />,
   },
 ])
 
