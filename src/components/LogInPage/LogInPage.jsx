@@ -1,6 +1,4 @@
 import { useState } from 'react'
-// eslint-disable-next-line no-unused-vars
-import { TOKEN_KEY_IN_LS } from '../../utils/constrans'
 import { AutorizationModal } from '../Modal/AutorizationModal'
 import { Modal } from '../Modal/Modal'
 import imgHeader from './imgLogInPage.jpg'
@@ -17,8 +15,8 @@ export function LogInPage() {
   const [isModalAutorizationOpen, setIsModalAutorizationOpen] = useState(false)
 
   const logInBtn = (e) => {
-    setIsModalOpen(true)
     e.preventDefault()
+    setIsModalOpen(true)
   }
 
   const autorizationBtn = (e) => {

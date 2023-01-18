@@ -10,11 +10,15 @@ export const tokenSlice = createSlice({
       localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(action.payload))
       return action.payload
     },
+    getToken() {
+      return JSON.parse(localStorage.getItem(TOKEN_KEY_IN_LS))
+    },
   },
 })
 
 export const {
   setToken,
+  getToken,
 } = tokenSlice.actions
 
 export const tokenReducer = tokenSlice.reducer

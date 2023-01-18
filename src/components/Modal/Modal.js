@@ -3,30 +3,37 @@ import {
 } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
+import { useDispatch } from 'react-redux'
 import { api } from '../API/api'
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 import { USER } from '../../utils/constrans'
+import { getToken } from '../Redux/Slices/tokenSlice/tokenSlice'
 
 export function Modal({ isOpen, closeModal }) {
   const LOGIN_QUERY = ['LOGIN_QUERY']
-  const loginFn = () => {
-    api.getLogIn(USER.email, USER.password)
+  const loginFn = async () => {
+    await api.getLogIn(USER.email, USER.password)
   }
 
-  const { refetch } = useQuery({
-    queryKey: LOGIN_QUERY,
-    queryFn: loginFn,
-    refetchOnWindowFocus: false,
-    enabled: false,
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { mutateAsync } = useMutation({
+    mutationKey: LOGIN_QUERY,
+    mutationFn: loginFn,
+    onSuccess: () => {
+      dispatch(getToken())
+      closeModal(!true)
+      navigate('/')
+    },
   })
 
   const closeModalHandler = () => {
     closeModal(!true)
   }
 
-  const navigate = useNavigate()
   return (
     <div className={isOpen ? `${styles.modal} ${styles.active}` : `${styles.modal}`}>
       <div className={`${styles.buttonClose}`}>
@@ -45,15 +52,10 @@ export function Modal({ isOpen, closeModal }) {
               email: Yup.string().email('Invalid email address').required('email asd'),
             },
           )}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             USER.email = values.email
             USER.password = values.password
-            refetch()
-            closeModal(!true)
-
-            setTimeout(() => {
-              navigate('/')
-            }, 300)
+            await mutateAsync()
           }}
         >
           <Form className={editUserStyles.editForm}>

@@ -50,6 +50,7 @@ class API {
     })
     const result = await response.json()
     localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
+    return result.token
   }
 
   // eslint-disable-next-line class-methods-use-this
