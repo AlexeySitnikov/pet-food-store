@@ -1,9 +1,12 @@
+import { useMutation } from '@tanstack/react-query'
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../API/api'
+import { getToken } from '../Redux/Slices/tokenSlice/tokenSlice'
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 
@@ -14,6 +17,22 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
     group: '',
   }
   const navigate = useNavigate()
+  const REGISTRATION_QUERY = ['REGISTRATION_QUERY']
+  const registerFn = async () => {
+    await api.getAutorization(UserData.email, UserData.password, UserData.group)
+  }
+  const dispatch = useDispatch()
+
+  const { mutateAsync } = useMutation({
+    mutationKey: REGISTRATION_QUERY,
+    mutationFn: registerFn,
+    onSuccess: async () => {
+      await api.getLogIn(UserData.email, UserData.password)
+      dispatch(getToken())
+      setIsModalAutorizationOpen(!true)
+      navigate('/')
+    },
+  })
 
   const closeModalHandler = () => {
     setIsModalAutorizationOpen(false)
@@ -38,19 +57,11 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
               email: Yup.string().email('Invalid email address').required('email'),
             },
           )}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             UserData.email = values.email
             UserData.password = values.password
             UserData.group = values.group
-            api.getAutorization(UserData.email, UserData.password, UserData.group)
-            setTimeout(() => {
-              api.getLogIn(UserData.email, UserData.password)
-            }, 300)
-
-            setIsModalAutorizationOpen(!true)
-            setTimeout(() => {
-              navigate('/')
-            }, 500)
+            await mutateAsync()
           }}
         >
           <Form className={editUserStyles.editForm}>
