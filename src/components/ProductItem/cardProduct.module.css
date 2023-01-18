@@ -1,5 +1,5 @@
 .cardProduct{
-height:600px;
+height:700px;
 }
 
 * {
@@ -7,7 +7,7 @@ height:600px;
 }
 .product_item {
   width: 300px;
-  height: 350px;
+  height: 450px;
   margin: 0 auto;
   padding: 10px 10px 5px 10px;
   border: 1px solid #eee;
@@ -102,4 +102,20 @@ height:600px;
 }
 .compare::after {
   content: "\f079";
+}
+
+.discount{
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+}
+
+.discountPrice{
+  display: block;
+  text-decoration-line: line-through;
+}
+
+.in_cart_button{
+  background-color: #f3a005;
 }
