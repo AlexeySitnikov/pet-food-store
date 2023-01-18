@@ -6,6 +6,7 @@ import { Header } from './components/Header/Header'
 
 function App() {
   const token = useSelector((store) => store.token)
+
   return token ? (
     <>
       <Header />

@@ -9,16 +9,17 @@ import { api } from '../API/api'
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 import { USER } from '../../utils/constrans'
-import { getToken } from '../Redux/Slices/tokenSlice/tokenSlice'
+import { getToken, setToken } from '../Redux/Slices/tokenSlice/tokenSlice'
 
 export function Modal({ isOpen, closeModal }) {
   const LOGIN_QUERY = ['LOGIN_QUERY']
+  const dispatch = useDispatch()
+
   const loginFn = async () => {
-    await api.getLogIn(USER.email, USER.password)
+    dispatch(setToken(await api.getLogIn(USER.email, USER.password)))
   }
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const { mutateAsync } = useMutation({
     mutationKey: LOGIN_QUERY,

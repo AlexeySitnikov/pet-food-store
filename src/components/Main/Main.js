@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
+
 // import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import styles from './mainPage.module.css'

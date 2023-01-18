@@ -1,5 +1,5 @@
-export const TOKEN_KEY_IN_LS = 'token_pet_food_store'
 export const USER = {
   email: '',
   password: '',
 }
+export const ALL_STORE = 'pet_food_all_store'

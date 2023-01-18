@@ -11,6 +11,7 @@ import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
 export function ProductItem({ product }) {
   const productsInCart = useSelector((cart) => cart.products)
   const dispatch = useDispatch()
+
   const addToCartHandler = (e) => {
     e.preventDefault()
     dispatch(addToCart(product))

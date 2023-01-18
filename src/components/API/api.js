@@ -1,4 +1,4 @@
-import { TOKEN_KEY_IN_LS, USER } from '../../utils/constrans'
+import { ALL_STORE, USER } from '../../utils/constrans'
 
 const BASE_URL = 'https://api.react-learning.ru/products'
 // const USER1 = {
@@ -13,7 +13,7 @@ class API {
 
   // eslint-disable-next-line class-methods-use-this
   getToken() {
-    return JSON.parse(localStorage.getItem(TOKEN_KEY_IN_LS))
+    return JSON.parse(localStorage.getItem(ALL_STORE)).token
   }
 
   async getAllProducts() {
@@ -49,7 +49,6 @@ class API {
       body: JSON.stringify(USER),
     })
     const result = await response.json()
-    localStorage.setItem(TOKEN_KEY_IN_LS, JSON.stringify(result.token))
     return result.token
   }
 
@@ -68,7 +67,6 @@ class API {
       body: JSON.stringify(userForAutorization),
     })
     const result = await response.json()
-    // console.log(result)
     return result
   }
 
