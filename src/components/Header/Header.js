@@ -22,7 +22,10 @@ export function Header() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [input, setInput] = useState(() => searchParams.get('query') ?? '')
   const debounceValue = useDebounce(input, 300)
-  dispatch(changeProductNameForSearch(debounceValue))
+
+  useEffect(() => {
+    dispatch(changeProductNameForSearch(debounceValue))
+  }, [debounceValue])
 
   useEffect(() => {
     setSearchParams({ query: input })
