@@ -27,8 +27,8 @@ export function ProductItem({ product }) {
       <div className={`${styles.product_list}`}>
         <h3>{product.name}</h3>
         <div className={`${styles.stars}`} />
-        <span className={`${styles.discount}`}>{discount ? `${product.discount}%` : ''}</span>
-        <span className={discount ? `${styles.discount}` : `${styles.price}`}>{product.price - (product.price * product.discount) / 100}</span>
+        <span className={`${styles.discount}`}>{discount ? `скидка ${product.discount}%` : ''}</span>
+        <span className={discount ? `${styles.discount}` : `${styles.price}`}>{`${product.price - (product.price * product.discount) / 100}`}</span>
         <div className={`${styles.actions}`}>
           <div className={`${styles.add_to_cart}`}>
             <button type="button" className={(productsInCart.findIndex((item) => item.id === product._id) !== -1) ? `${styles.in_cart_button}` : `${styles.cart_button}`} onClick={addToCartHandler}>
