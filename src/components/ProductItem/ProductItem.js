@@ -47,12 +47,12 @@ export function ProductItem({ product }) {
         <div className={`${styles.actions}`}>
           <div className={`${styles.add_to_cart}`}>
             <button type="button" className={(productsInCart.findIndex((item) => item.id === product._id) !== -1) ? `${styles.in_cart_button}` : `${styles.cart_button}`} onClick={addToCartHandler}>
-              {(productsInCart.findIndex((item) => item.id === product._id) !== -1) ? 'В корзине' : 'В корзину'}
+              {(productsInCart.findIndex((item) => item.id === product._id) !== -1) ? '🛒 В корзине' : '🛒 В корзину'}
             </button>
           </div>
           <div className={`${styles.add_to_links}`}>
-            <a href="" className={`${styles.wishlist}`} />
-            <a href="" className={`${styles.compare}`} />
+            <span className={`${styles.wishlist}`}>♡</span>
+            <span className={`${styles.compare}`}>⚖</span>
           </div>
         </div>
       </div>

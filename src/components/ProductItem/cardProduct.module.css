@@ -55,6 +55,7 @@ height:700px;
   height: 14px;
   line-height: 14px;
   margin: 7px 0;
+  font-size: 20px;
 }
 
 .actions {
@@ -80,31 +81,16 @@ height:700px;
   border-right: 1px solid #ddd;
   transition: .4s linear;
 }
-.cart_button:before {
 
-  font-family: "Font Awesome 5 Free";
-  content: "\f007";
-  font-weight: 900; 
-  margin-right: 10px;
-}
 .add_to_cart:hover .cart_button, .wishlist:hover, .compare:hover {
   color: #E34D38;
 }
 .wishlist, .compare {
+  font-size: 30px;
   color: #8C877C;
   padding-left: 20px;
   transition: .4s linear;
-}
-.wishlist::after, .compare::after {
-  display: inline-block;
-  font-family: FontAwesome;
-  font-size: 13px;
-}
-.wishlist::after {
-  content: "\f004";
-}
-.compare::after {
-  content: "\f079";
+  cursor: pointer;
 }
 
 .discount{
