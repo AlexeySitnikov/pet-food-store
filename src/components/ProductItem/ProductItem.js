@@ -7,10 +7,19 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './cardProduct.module.css'
 import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
+import { RatingStar } from '../RatingStars/RatingStar'
 
 export function ProductItem({ product }) {
   const productsInCart = useSelector((cart) => cart.products)
   const dispatch = useDispatch()
+
+  let rating = 0
+  if (product.reviews.length > 0) {
+    for (let i = 0; i < product.reviews.length; i += 1) {
+      rating += product.reviews[i].rating
+    }
+    rating /= product.reviews.length
+  }
 
   const addToCartHandler = (e) => {
     e.preventDefault()
@@ -25,8 +34,14 @@ export function ProductItem({ product }) {
         <img src={product.pictures} alt="Food" />
       </div>
       <div className={`${styles.product_list}`}>
-        <h3>{product.name}</h3>
-        <div className={`${styles.stars}`} />
+        <div className={`${styles.product_name}`}>
+          <h3>{product.name}</h3>
+        </div>
+        <div className={`${styles.stars}`}>
+          {
+            [...(new Array(Math.round(rating)))].map(() => <RatingStar key={crypto.randomUUID()} />)
+          }
+        </div>
         <span className={`${styles.discount}`}>{discount ? `скидка ${product.discount}%` : ''}</span>
         <span className={discount ? `${styles.discount}` : `${styles.price}`}>{`${product.price - (product.price * product.discount) / 100}`}</span>
         <div className={`${styles.actions}`}>
