@@ -1,0 +1,54 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  display: flex;
+  /* border: 10px solid black; */
+}
+
+.listOfProducts{
+  width: 75vw;
+}
+
+.orderSideContainer{
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  /* border: 10px solid black; */
+}
+
+.totalPriceTextLabel{
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  /* border: 10px solid black; */
+}
+
+.orderTextLabel{
+  align-self: center;
+}
+
+.totalPriceAmountLabel{
+  font-size: 30px;
+  font-weight: 700;
+  color: brown;
+  text-decoration: underline;
+  align-self: center;
+  /* border: 10px solid black; */
+}
+
+.discountPriceAmountLabel{
+  font-size: 40px;
+  font-weight: 700;
+  color: rgb(236, 14, 14);
+  text-decoration:underline;
+  align-self: center;
+}
+
+.discountPriceTextLabel{
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+}

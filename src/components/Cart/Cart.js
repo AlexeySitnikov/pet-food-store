@@ -7,6 +7,7 @@ import { BackButton } from './BackButton'
 import { CartItem } from './CartItem'
 import { ClearCartButton } from './ClearCartButton'
 import { MakeAnOrderButton } from './MakeAnOrderButton'
+import styles from './styles.cart.module.css'
 
 export function Cart() {
   const cart = useSelector((store) => store.products)
@@ -31,6 +32,18 @@ export function Cart() {
     })
   })
 
+  let totalPriceWithDiscount = 0
+  for (let i = 0; i < productsToBuy.length; i += 1) {
+    totalPriceWithDiscount
+    += (productsToBuy[i].price - ((productsToBuy[i].price * productsToBuy[i].discount) / 100))
+    * productsToBuy[i].quantityToBuy
+  }
+
+  let totalPrice = 0
+  for (let i = 0; i < productsToBuy.length; i += 1) {
+    totalPrice += productsToBuy[i].price * productsToBuy[i].quantityToBuy
+  }
+
   if (!products.length) {
     return (
       <>
@@ -42,8 +55,10 @@ export function Cart() {
   }
   return (
     <>
-      <ul className="list-group">
-        {
+      <div className={`${styles.container}`}>
+        <div className={`${styles.listOfProducts}`}>
+          <ul className="list-group">
+            {
           products.map((cartItem, i) => (
             <CartItem
               key={crypto.randomUUID()}
@@ -52,7 +67,26 @@ export function Cart() {
             />
           ))
         }
-      </ul>
+          </ul>
+        </div>
+        <div className={`${styles.orderSideContainer}`}>
+          <div className={`${styles.orderTextLabel}`}>
+            <h1>Order</h1>
+          </div>
+          <div className={`${styles.totalPriceTextLabel}`}>
+            <h2>Total price</h2>
+            <div className={`${styles.totalPriceAmountLabel}`}>
+              <p>{totalPriceWithDiscount}</p>
+            </div>
+          </div>
+          <div className={`${styles.discountPriceTextLabel}`}>
+            <h2>You save</h2>
+            <div className={`${styles.discountPriceAmountLabel}`}>
+              <p>{totalPrice - totalPriceWithDiscount}</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <BackButton />
       <ClearCartButton />
       <MakeAnOrderButton products={productsToBuy} />
