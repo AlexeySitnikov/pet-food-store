@@ -76,13 +76,13 @@ export function Cart() {
           <div className={`${styles.totalPriceTextLabel}`}>
             <h2>Total price</h2>
             <div className={`${styles.totalPriceAmountLabel}`}>
-              <p>{`${totalPriceWithDiscount} руб`}</p>
+              <p>{`${totalPriceWithDiscount} rub`}</p>
             </div>
           </div>
           <div className={`${styles.discountPriceTextLabel}`}>
             <h2>You save</h2>
             <div className={`${styles.discountPriceAmountLabel}`}>
-              <p>{`${totalPrice - totalPriceWithDiscount} руб`}</p>
+              <p>{`${totalPrice - totalPriceWithDiscount} rub`}</p>
             </div>
           </div>
         </div>

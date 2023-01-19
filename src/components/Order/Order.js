@@ -37,7 +37,7 @@ export function Order() {
             <h2>
               Total price
               {' '}
-              <span className={`${styles.totalPriceAmountLabel}`}>{`${totalPrice} руб`}</span>
+              <span className={`${styles.totalPriceAmountLabel}`}>{`${totalPrice} rub`}</span>
             </h2>
           </div>
           <button onClick={() => { navigate(-1) }} type="button" className="btn mx-2 btn-success">Back</button>
