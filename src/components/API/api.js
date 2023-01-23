@@ -80,6 +80,21 @@ class API {
     const result = await responce.json()
     return result
   }
+
+  async changeUserData(userName) {
+    const changeUserData = {
+      name: userName,
+    }
+    const responce = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
+      method: 'PATCH',
+      headers: {
+        autorization: `${this.getToken()}`,
+        body: JSON.stringify(changeUserData),
+      },
+    })
+    const result = await responce.json()
+    return result
+  }
 }
 
 export const api = new API(BASE_URL)

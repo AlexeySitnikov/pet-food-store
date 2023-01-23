@@ -1,13 +1,29 @@
 import {
   Field, Form, Formik,
 } from 'formik'
+import { useState } from 'react'
 
 import * as Yup from 'yup'
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 
 export function ModalUser({ isOpen, closeModal, userInfo }) {
+  const initialName = userInfo.name
+  const initialEmail = userInfo.email
+  const [userName, setUserName] = useState(initialName)
+  const [userEmail, setUserEmail] = useState(initialEmail)
+
+  const clearModalForm = () => {
+    setUserName(initialName)
+    setUserEmail(initialEmail)
+  }
+
   const closeModalHandler = () => {
+    clearModalForm()
+    closeModal(!true)
+  }
+
+  const needToChangeClickHandled = () => {
     closeModal(!true)
   }
 
@@ -23,19 +39,47 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
         <img className="" src={`${userInfo.avatar}`} alt="Avatar" />
         <Formik
           initialValues={{
-            name: userInfo.name,
-            email: userInfo.email,
+            name: userName,
+            email: userEmail,
           }}
-          validationSchema={Yup.object({})}
-          onSubmit={() => {
-            closeModal(!true)
-          }}
+          validationSchema={Yup.object({
+            email: Yup.string().email('Invalid email address').required('Required'),
+          })}
+          onsubmit={() => {}}
         >
           <Form className={editUserStyles.editForm}>
 
-            <Field name="name" placeholder="Name" type="text" value={`${userInfo.name}`} />
-            <Field name="email" placeholder="Email" type="email" value={`${userInfo.email}`} />
-            <button type="submit" className="btn btn-primary">Close</button>
+            <Field
+              name="name"
+              type="text"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value)
+              }}
+            />
+            <Field
+              name="email"
+              type="email"
+              value={userEmail}
+              onChange={(e) => {
+                setUserEmail(e.target.value)
+              }}
+            />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={closeModalHandler}
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={((initialName === userName) && (initialEmail === userEmail))}
+              onClick={needToChangeClickHandled}
+            >
+              Change
+            </button>
           </Form>
         </Formik>
       </div>
