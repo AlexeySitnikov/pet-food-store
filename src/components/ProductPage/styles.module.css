@@ -1,0 +1,50 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.page{
+  display: flex;
+  flex-direction: column;
+}
+
+.img{
+  margin-top: 20px;
+  width: 400px;
+  align-self: center;
+}
+
+.backButtonDiv{
+display: flex;
+justify-content: center;
+}
+
+.backButton{
+  color: white;
+  background-color: green;
+}
+
+.backButton:hover{
+  background-color:chocolate
+}
+
+.productName{
+  align-self: center;
+}
+
+.reviewItem{
+  display: flex;
+  justify-content: space-between;
+}
+
+.reviewAutthor{
+  width: 250px;
+  background-color: aqua;
+}
+
+.reviewComment{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+}
