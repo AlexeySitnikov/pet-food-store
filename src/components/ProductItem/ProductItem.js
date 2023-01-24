@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -5,6 +6,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styles from './cardProduct.module.css'
 import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
 import { RatingStar } from '../RatingStars/RatingStar'
@@ -12,6 +14,7 @@ import { RatingStar } from '../RatingStars/RatingStar'
 export function ProductItem({ product }) {
   const productsInCart = useSelector((cart) => cart.products)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   let rating = 0
   if (product.reviews.length > 0) {
@@ -23,13 +26,38 @@ export function ProductItem({ product }) {
 
   const addToCartHandler = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     dispatch(addToCart(product))
+  }
+
+  const likeClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log(`${product.name} like`)
+  }
+
+  const productClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    navigate(`/product?id=${product._id}`)
+  }
+
+  const compareClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    alert('compare function isn`t realized')
+  }
+
+  const ratingClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    alert('rating function isn`t realized')
   }
 
   const discount = product.discount !== 0
 
   return (
-    <div className={`${styles.product_item}`}>
+    <div className={`${styles.product_item}`} onClick={productClickHandler}>
       <div className={`${styles.product_img}`}>
         <img src={product.pictures} alt="Food" />
       </div>
@@ -37,7 +65,7 @@ export function ProductItem({ product }) {
         <div className={`${styles.product_name}`}>
           <h3>{product.name}</h3>
         </div>
-        <div className={`${styles.stars}`}>
+        <div className={`${styles.stars}`} onClick={ratingClickHandler}>
           {
             [...(new Array(Math.round(rating)))].map(() => <RatingStar key={crypto.randomUUID()} />)
           }
@@ -51,8 +79,8 @@ export function ProductItem({ product }) {
             </button>
           </div>
           <div className={`${styles.add_to_links}`}>
-            <span className={`${styles.wishlist}`}>♡</span>
-            <span className={`${styles.compare}`}>⚖</span>
+            <span className={`${styles.wishlist}`} onClick={likeClickHandler}>♡</span>
+            <span className={`${styles.compare}`} onClick={compareClickHandler}>⚖</span>
           </div>
         </div>
       </div>

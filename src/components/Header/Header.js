@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-// import { api } from '../API/api'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
@@ -31,7 +30,7 @@ export function Header() {
     setSearchParams({ query: input })
   }, [input])
 
-  const GETUSERINFO = ['GETUSERINFO']
+  const GETUSERINFO = ['GETUSERINFO'].concat(isModalUserInfoOpen)
   const getUserInfo = async () => {
     const responce = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
       method: 'GET',
@@ -102,5 +101,4 @@ export function Header() {
       </>
     )
   }
-  return null
 }

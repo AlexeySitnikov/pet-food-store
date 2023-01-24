@@ -37,6 +37,17 @@ class API {
       .then((res) => res.json())))
   }
 
+  async getProductById(id) {
+    const responce = await fetch(`https://api.react-learning.ru/products/${id}`, {
+      method: 'GET',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
+    })
+    const result = await responce.json()
+    return result
+  }
+
   // eslint-disable-next-line class-methods-use-this
   async getLogIn(email, password) {
     USER.email = email
@@ -81,16 +92,18 @@ class API {
     return result
   }
 
-  async changeUserData(userName) {
+  async changeUserData(name, about) {
     const changeUserData = {
-      name: userName,
+      name,
+      about,
     }
     const responce = await fetch('https://api.react-learning.ru/v2/sm8/users/me', {
       method: 'PATCH',
       headers: {
-        autorization: `${this.getToken()}`,
-        body: JSON.stringify(changeUserData),
+        'Content-Type': 'application/json',
+        authorization: `${this.getToken()}`,
       },
+      body: JSON.stringify(changeUserData),
     })
     const result = await responce.json()
     return result

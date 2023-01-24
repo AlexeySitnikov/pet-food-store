@@ -1,9 +1,12 @@
+import { useMutation } from '@tanstack/react-query'
 import {
   Field, Form, Formik,
 } from 'formik'
 import { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
+import { api } from '../API/api'
+
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 
@@ -12,6 +15,14 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
   const initialEmail = userInfo.email
   const [userName, setUserName] = useState(initialName)
   const [userEmail, setUserEmail] = useState(initialEmail)
+  const CHANGE_USER_DATA_QUERY = ['CHANGE_USER_DATA_QUERY']
+  const navigate = useNavigate()
+
+  const loginFn = async () => {
+    const result = await api.changeUserData(userName, userInfo.about)
+    setUserName(result.name)
+    setUserEmail(result.email)
+  }
 
   const clearModalForm = () => {
     setUserName(initialName)
@@ -23,9 +34,20 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
     closeModal(!true)
   }
 
-  const needToChangeClickHandled = () => {
-    closeModal(!true)
+  const { mutateAsync } = useMutation({
+    mutationKey: CHANGE_USER_DATA_QUERY,
+    mutationFn: loginFn,
+    onSuccess: () => {
+      navigate('/')
+      closeModal(!true)
+    },
+  })
+
+  const needToChangeClickHandled = async () => {
+    await mutateAsync()
   }
+
+  const emptyFunction = () => {}
 
   return (
     <div className={isOpen ? `${styles.modal} ${styles.active}` : `${styles.modal}`}>
@@ -45,7 +67,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
           validationSchema={Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
           })}
-          onsubmit={() => {}}
+          onsubmit={emptyFunction()}
         >
           <Form className={editUserStyles.editForm}>
 
