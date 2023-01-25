@@ -94,6 +94,10 @@ height:700px;
   cursor: pointer;
 }
 
+.wishlist{
+  color: red;
+}
+
 .discount{
   color: red;
   font-size: 20px;

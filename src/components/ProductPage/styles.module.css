@@ -112,3 +112,7 @@ button:hover{
   transition: .4s linear;
   cursor: pointer;
 }
+
+.wishlist{
+  color: red;
+}
