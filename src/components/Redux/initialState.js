@@ -13,6 +13,7 @@ export const initialState = {
   products: [],
   productsNameToSearch: '',
   token: '',
+  likeProduct: [],
 }
 
 export const getInitialState = () => {

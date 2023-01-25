@@ -11,6 +11,7 @@ import { BackButton } from './BackButton'
 import { ListOfReviews } from './ListOfReviews'
 import cartLogo from '../Header/cart.png'
 import style from './styles.module.css'
+import { like } from '../Redux/Slices/likeProductSlice/likeProductSlice'
 
 export function ProductPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -20,6 +21,7 @@ export function ProductPage() {
   const navigate = useNavigate()
   const productsInCart = useSelector((cart) => cart.products)
   const products = useSelector((store) => store.products)
+  const likeProducts = useSelector((cart) => cart.likeProduct)
 
   useEffect(() => {
     setSearchParams({ id: input })
@@ -50,7 +52,7 @@ export function ProductPage() {
   const likeClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log(`${product.name} like`)
+    dispatch(like(product))
   }
 
   if (isLoading) {
@@ -78,7 +80,7 @@ export function ProductPage() {
       <h1 className={`${style.productName}`}>
         {product.name}
         <div className={`${style.add_to_links}`}>
-          <span className={`${style.wishlist}`} onClick={likeClickHandler}>♡</span>
+          <span className={`${style.wishlist}`} onClick={likeClickHandler}>{(likeProducts.findIndex((id) => id === product._id) !== -1) ? '♥' : '♡'}</span>
         </div>
       </h1>
       <h3 className={`${style.productName}`}>

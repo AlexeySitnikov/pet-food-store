@@ -10,9 +10,11 @@ import { useNavigate } from 'react-router-dom'
 import styles from './cardProduct.module.css'
 import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
 import { RatingStar } from '../RatingStars/RatingStar'
+import { like } from '../Redux/Slices/likeProductSlice/likeProductSlice'
 
 export function ProductItem({ product }) {
   const productsInCart = useSelector((cart) => cart.products)
+  const likeProducts = useSelector((cart) => cart.likeProduct)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -33,7 +35,7 @@ export function ProductItem({ product }) {
   const likeClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log(`${product.name} like`)
+    dispatch(like(product))
   }
 
   const productClickHandler = (e) => {
@@ -79,7 +81,7 @@ export function ProductItem({ product }) {
             </button>
           </div>
           <div className={`${styles.add_to_links}`}>
-            <span className={`${styles.wishlist}`} onClick={likeClickHandler}>♡</span>
+            <span className={`${styles.wishlist}`} onClick={likeClickHandler}>{(likeProducts.findIndex((id) => id === product._id) !== -1) ? '♥' : '♡'}</span>
             <span className={`${styles.compare}`} onClick={compareClickHandler}>⚖</span>
           </div>
         </div>
