@@ -2,7 +2,7 @@ header{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  /* padding: 20px; */
   position: fixed;
   top: 0;
   z-index: 1;
@@ -14,7 +14,6 @@ header{
 
 .header__logo{
 height: 150px;
-
 }
 
 button{
@@ -76,4 +75,16 @@ button:hover{
   text-align: center;
 
   font: 12px Arial, sans-serif;
+}
+
+.like{
+  margin: 0;
+  padding: 0;
+  font-size: 50px;
+  color: red;
+  cursor: pointer;
+}
+
+.header__control{
+  display: flex;
 }

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/self-closing-comp */
 import { useQuery } from '@tanstack/react-query'
@@ -56,6 +58,11 @@ export function Header() {
     navigate('cart')
   }
 
+  const showLikeProducts = (e) => {
+    e.preventDefault()
+    navigate('likeList')
+  }
+
   const searchProductHandler = () => {
     // querySearchProductByName(debounceValue)
   }
@@ -79,6 +86,9 @@ export function Header() {
             </form>
           </div>
           <div className={`${styles.header__control}`}>
+            <div>
+              <span onClick={showLikeProducts} className={`${styles.like} px-5 mx-1`}>♥</span>
+            </div>
             <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
 
             <button type="button" onClick={showCart} className={`${styles.button} px-5 mx-1`}>

@@ -12,6 +12,7 @@ import { store } from './components/Redux/store'
 import { Cart } from './components/Cart/Cart'
 import { Order } from './components/Order/Order'
 import { ProductPage } from './components/ProductPage/ProductPage'
+import { LikeProductPage } from './components/LikeProductPage/LikeProductPage'
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: 'product',
     element: <ProductPage />,
+  },
+  {
+    path: 'likeList',
+    element: <LikeProductPage />,
   },
 ])
 
