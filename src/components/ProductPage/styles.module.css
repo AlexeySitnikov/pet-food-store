@@ -48,3 +48,67 @@ justify-content: center;
   align-self: center;
   align-items: center;
 }
+
+.in_cart_button{
+  background-color: #f3a005;
+}
+
+.cart_button {
+  text-decoration: none;
+  background-color: #23a030;
+  color: #fff;
+  padding-right: 20px;
+  border-right: 1px solid #ddd;
+  transition: .4s linear;
+}
+
+.cartButtonDiv{
+  display: flex;
+  justify-content: center;
+}
+
+.numberCircle {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+
+  background: rgb(245, 4, 4);
+  border: 2px solid #666;
+  color: rgb(247, 244, 244);
+  text-align: center;
+
+  font: 12px Arial, sans-serif;
+}
+
+button{
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  color: #fff;
+  background-color: #23a030;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 16px 36px rgb(52, 213, 68, 0.22);
+  padding: 15px;
+}
+
+button:hover{
+  background-color: #f6980c;
+  box-shadow: 0 16px 36px rgba(246 152 12 0.9);
+  transition: background-color 0.3s ease-in;
+}
+
+.add_to_cart, .add_to_links {
+  float: left;
+}
+.add_to_cart:hover .cart_button, .wishlist:hover, .compare:hover {
+  color: #E34D38;
+}
+.wishlist, .compare {
+  font-size: 30px;
+  color: #8C877C;
+  padding-left: 20px;
+  transition: .4s linear;
+  cursor: pointer;
+}

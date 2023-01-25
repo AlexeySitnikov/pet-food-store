@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../API/api'
+import { RatingStar } from '../RatingStars/RatingStar'
 
 import style from './styles.module.css'
 
@@ -29,12 +30,9 @@ export function ListOfReviews({ review }) {
         </div>
         <div className={`${style.reviewComment}`}>
           <span>{`${review.text}`}</span>
-          <span>{`${review.rating}`}</span>
-          {/* <span>
-            {review.rating.map(() => (
-              <RatingStar key={crypto.randomUUID()} />
-            ))}
-          </span> */}
+          <span>
+            {[...(new Array(review.rating))].map(() => <RatingStar key={crypto.randomUUID()} />)}
+          </span>
         </div>
       </div>
       <hr />
