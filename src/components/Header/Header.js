@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -55,12 +56,17 @@ export function Header() {
 
   const showCart = (e) => {
     e.preventDefault()
-    navigate('cart')
+    navigate('/cart')
   }
 
   const showLikeProducts = (e) => {
     e.preventDefault()
-    navigate('likeList')
+    navigate('/likeList')
+  }
+
+  const logoClichHandler = (e) => {
+    e.preventDefault()
+    navigate('/')
   }
 
   const searchProductHandler = () => {
@@ -72,7 +78,7 @@ export function Header() {
       <>
         <div className={`${styles.header} d-flex my-5 align-self-center align-items-center`}>
           <div className="me-auto p-2">
-            <img className={`${styles.header__logo}`} src={`${logo}`} alt="logo" />
+            <img className={`${styles.header__logo}`} src={`${logo}`} alt="logo" onClick={logoClichHandler} />
           </div>
           <div className="d1">
             <form>

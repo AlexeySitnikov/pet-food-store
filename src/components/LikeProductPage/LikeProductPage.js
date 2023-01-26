@@ -17,7 +17,7 @@ export function LikeProductPage() {
   if (!products.length) {
     return (
       <>
-        <p>Cart is empty...</p>
+        <h1>Like list is empty...</h1>
         <BackButton />
       </>
     )

@@ -42,6 +42,7 @@ export function Main() {
     }
     return responseArr.products
   }
+
   const query = useQuery({
     queryKey: GETPRODUCTS,
     queryFn: getProducts,

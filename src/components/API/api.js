@@ -119,6 +119,17 @@ class API {
     const result = await responce.json()
     return result
   }
+
+  async getProductsByQuery(query) {
+    const response = await fetch(`${this.url}/search?query=${query}`, {
+      method: 'GET',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
+    })
+    const responseArr = await response.json()
+    return responseArr
+  }
 }
 
 export const api = new API(BASE_URL)
