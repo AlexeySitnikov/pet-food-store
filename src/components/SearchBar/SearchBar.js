@@ -33,17 +33,24 @@ export function SearchBar() {
     navigate('/products/bydate')
   }
 
+  const addNewProductClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    navigate('/addnewproduct')
+  }
+
   return (
     <div className="d-flex justify-content-center py-5 align-items-center">
-      <span>Sort</span>
-      <button type="button" className="mx-1" onClick={sortByNameClickHandler}>By Name</button>
-      <button type="button" className="mx-1" onClick={sortByPriceClickHandler}>By Price</button>
-      <button type="button" className="mx-1" onClick={sortByDiscountClickHandler}>By Discount</button>
-      <button type="button" className="mx-1" onClick={sortByRatingClickHandler}>By Rating</button>
+      <span>Sort by</span>
+      <button type="button" className="mx-1" onClick={sortByNameClickHandler}>Name</button>
+      <button type="button" className="mx-1" onClick={sortByPriceClickHandler}>Price</button>
+      <button type="button" className="mx-1" onClick={sortByDiscountClickHandler}>Discount</button>
+      <button type="button" className="mx-1" onClick={sortByRatingClickHandler}>Rating</button>
       <button type="button" className="mx-1" onClick={sortByCreateDateClickHandler}>
-        By Date
+        Date
         <p>Updated</p>
       </button>
+      <button type="button" className="mx-1" onClick={addNewProductClickHandler}>Add new product</button>
     </div>
   )
 }

@@ -18,6 +18,7 @@ import { SortByPrice } from './components/SearchBar/SortByPrice'
 import { SortByDiscount } from './components/SearchBar/SortByDiscount'
 import { SortByRating } from './components/SearchBar/SortByRating'
 import { SortByDate } from './components/SearchBar/SortByDate'
+import { AddNewProduct } from './components/AddNewProduct/AddNewProduct'
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: '/products/bydate',
     element: <SortByDate />,
+  },
+  {
+    path: 'addnewproduct',
+    element: <AddNewProduct />,
   },
 ])
 
