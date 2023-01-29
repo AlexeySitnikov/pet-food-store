@@ -6,7 +6,7 @@ export function AddNewProduct() {
   }
 
   return (
-    <div className="">
+    <div>
       <h1>Add new product page</h1>
       <Formik
         initialValues={{
@@ -14,10 +14,10 @@ export function AddNewProduct() {
         }}
         onSubmit={addNewProductClickHandler}
       >
-        <Form>
+        <Form className="d-flex flex-column">
           <Field name="ProductName" type="text" />
           <Field name="ProductPrice" type="number" />
-          <Field name="ProductDiscription" type="text" />
+          <Field name="ProductDiscription" type="textarea" />
           <Field name="ProductDiscount" type="number" />
           <button type="submit">Submit</button>
         </Form>
