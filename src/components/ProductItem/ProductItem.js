@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './cardProduct.module.css'
 import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
 import { RatingStar } from '../RatingStars/RatingStar'
-import { like } from '../Redux/Slices/likeProductSlice/likeProductSlice'
+import { addLike } from '../Redux/Slices/likeProductSlice/likeProductSlice'
 
 export function ProductItem({ product }) {
   const productsInCart = useSelector((cart) => cart.products)
@@ -35,7 +35,7 @@ export function ProductItem({ product }) {
   const likeClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    dispatch(like(product))
+    dispatch(addLike(product))
   }
 
   const productClickHandler = (e) => {

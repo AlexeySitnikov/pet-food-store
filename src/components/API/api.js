@@ -132,7 +132,6 @@ class API {
   }
 
   async addNewProduct(product) {
-    console.log(JSON.stringify(product))
     const response = await fetch(`${this.url}`, {
       method: 'POST',
       headers: {
@@ -140,6 +139,17 @@ class API {
         authorization: `${this.getToken()}`,
       },
       body: JSON.stringify(product),
+    })
+    const result = await response.json()
+    return result
+  }
+
+  async deleteProduct(id) {
+    const response = await fetch(`${this.url}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
     })
     const result = await response.json()
     return result

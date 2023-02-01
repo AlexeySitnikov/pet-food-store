@@ -1,24 +1,25 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { useMutation } from '@tanstack/react-query'
 import { Field, Form, Formik } from 'formik'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../API/api'
 
 export function AddNewProduct() {
-  const addNewProductClickHandler = async (values) => {
-    // const userId = await api.getUserData()
-    const product = {
-      discount: values.ProductDiscount,
-      stock: 100,
-      available: true,
-      pictures: values.ProductPicture,
-      name: values.ProductName,
-      price: values.ProductPrice,
-      wight: values.ProductWight,
-      description: values.ProductDiscription,
-    }
-    const result = await api.addNewProduct(product)
-    console.log(result)
+  const navigate = useNavigate()
+  const ADDPRODUCT = ['ADDPRODUCT']
+
+  const addProductFn = async (product) => {
+    api.addNewProduct(product)
   }
+
+  const { mutateAsync } = useMutation({
+    mutationKey: ADDPRODUCT,
+    mutationFn: addProductFn,
+    onSuccess: () => {
+      navigate('/')
+    },
+  })
 
   return (
     <div className="container">
@@ -28,12 +29,18 @@ export function AddNewProduct() {
           ProductName: '', ProductDiscount: 0, ProductPrice: 0, ProductDiscription: '', ProductPicture: '', ProductWight: '',
         }}
         onSubmit={async (values) => {
-          addNewProductClickHandler(values)
+          const product = {
+            discount: values.ProductDiscount,
+            stock: 100,
+            available: true,
+            pictures: values.ProductPicture,
+            name: values.ProductName,
+            price: values.ProductPrice,
+            wight: values.ProductWight,
+            description: values.ProductDiscription,
+          }
+          await mutateAsync(product)
         }}
-        // stock: product.stock,
-        // available: product.available,
-        // author: product.author,
-        // wight: product.wight,
       >
         <Form className="d-flex justify-content-center flex-column">
           <label htmlFor="ProductName">Product Name</label>

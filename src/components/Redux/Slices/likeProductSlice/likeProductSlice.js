@@ -6,7 +6,7 @@ export const likeProductSlice = createSlice({
   name: 'likeProduct',
   initialState: initialCart.likeProduct,
   reducers: {
-    like(state, action) {
+    addLike(state, action) {
       const currentIndex = state.findIndex((id) => id === action.payload._id)
       if (currentIndex !== -1) {
         state.splice(currentIndex, 1)
@@ -14,11 +14,17 @@ export const likeProductSlice = createSlice({
         state.push(action.payload._id)
       }
     },
+    deleteLike(state, action) {
+      const currentIndex = state.findIndex((id) => id === action.payload._id)
+      if (currentIndex !== -1) {
+        state.splice(currentIndex, 1)
+      }
+    },
   },
 })
 
 export const {
-  like,
+  addLike, deleteLike,
 } = likeProductSlice.actions
 
 export const likeProductReducer = likeProductSlice.reducer

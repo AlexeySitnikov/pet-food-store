@@ -1,22 +1,25 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { api } from '../API/api'
-import { addToCart } from '../Redux/Slices/productsSlice/productsSlice'
+import { addToCart, removeFromCart } from '../Redux/Slices/productsSlice/productsSlice'
 import { BackButton } from './BackButton'
 import { ListOfReviews } from './ListOfReviews'
 import cartLogo from '../Header/cart.png'
 import style from './styles.module.css'
-import { like } from '../Redux/Slices/likeProductSlice/likeProductSlice'
+import { addLike, deleteLike } from '../Redux/Slices/likeProductSlice/likeProductSlice'
+import trash from './trash.png'
 
 export function ProductPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [input] = useState(() => searchParams.get('id') ?? '')
   const GETPRODUCTID = [input]
+  const GETUSER = ['GETUSER']
+  const DELETEPRODUCT = ['DELETEPRODUCT']
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const productsInCart = useSelector((cart) => cart.products)
@@ -32,12 +35,34 @@ export function ProductPage() {
     return result
   }
 
-  const { data, isLoading } = useQuery({
+  const getUserData = async () => {
+    const result = await api.getUserData()
+    return result
+  }
+
+  const { data: product, isLoading } = useQuery({
     queryKey: GETPRODUCTID,
     queryFn: getProductById,
   })
 
-  const product = data
+  const { data: user, isLoading: isLoadingUser } = useQuery({
+    queryKey: GETUSER,
+    queryFn: getUserData,
+  })
+
+  const deleteProductFn = async () => {
+    api.deleteProduct(product._id)
+  }
+
+  const { mutateAsync } = useMutation({
+    mutationKey: DELETEPRODUCT,
+    mutationFn: deleteProductFn,
+    onSuccess: () => {
+      dispatch(removeFromCart(product))
+      dispatch(deleteLike(product))
+      navigate('/')
+    },
+  })
 
   const addToCartClickHandler = (e) => {
     e.preventDefault()
@@ -52,10 +77,16 @@ export function ProductPage() {
   const likeClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    dispatch(like(product))
+    dispatch(addLike(product))
   }
 
-  if (isLoading) {
+  const onTrashCanClickHandler = async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    await mutateAsync()
+  }
+
+  if (isLoading || isLoadingUser) {
     return (
       <>
         <p>Loading...</p>
@@ -63,6 +94,7 @@ export function ProductPage() {
       </>
     )
   }
+
   return (
     <div className={`${style.page}`}>
       <div className={`${style.backButtonDiv}`}>
@@ -74,6 +106,8 @@ export function ProductPage() {
             <span className={`${style.numberCircle}`}>{`${products.length}`}</span>
           </div>
         </button>
+        {(user._id === product.author._id) ? <button type="button" className={`${style.button} px-5 mx-1`} onClick={onTrashCanClickHandler}><img src={`${trash}`} alt="trash" /></button> : null}
+
       </div>
       <img className={`${style.img}`} src={product.pictures} alt="Food" />
       <hr />
