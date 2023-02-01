@@ -130,6 +130,20 @@ class API {
     const responseArr = await response.json()
     return responseArr
   }
+
+  async addNewProduct(product) {
+    console.log(JSON.stringify(product))
+    const response = await fetch(`${this.url}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `${this.getToken()}`,
+      },
+      body: JSON.stringify(product),
+    })
+    const result = await response.json()
+    return result
+  }
 }
 
 export const api = new API(BASE_URL)

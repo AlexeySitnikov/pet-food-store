@@ -13,11 +13,6 @@ import { Cart } from './components/Cart/Cart'
 import { Order } from './components/Order/Order'
 import { ProductPage } from './components/ProductPage/ProductPage'
 import { LikeProductPage } from './components/LikeProductPage/LikeProductPage'
-import { SortByName } from './components/SearchBar/SortByName'
-import { SortByPrice } from './components/SearchBar/SortByPrice'
-import { SortByDiscount } from './components/SearchBar/SortByDiscount'
-import { SortByRating } from './components/SearchBar/SortByRating'
-import { SortByDate } from './components/SearchBar/SortByDate'
 import { AddNewProduct } from './components/AddNewProduct/AddNewProduct'
 
 const router = createBrowserRouter([
@@ -54,26 +49,6 @@ const router = createBrowserRouter([
   {
     path: 'likeList',
     element: <LikeProductPage />,
-  },
-  {
-    path: '/products/byname',
-    element: <SortByName />,
-  },
-  {
-    path: '/products/byprice',
-    element: <SortByPrice />,
-  },
-  {
-    path: '/products/bydiscount',
-    element: <SortByDiscount />,
-  },
-  {
-    path: '/products/byrating',
-    element: <SortByRating />,
-  },
-  {
-    path: '/products/bydate',
-    element: <SortByDate />,
   },
   {
     path: 'addnewproduct',
