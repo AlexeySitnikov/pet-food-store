@@ -3,6 +3,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { Field, Form, Formik } from 'formik'
 import { useLocation, useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
 import { api } from '../API/api'
 import { BackButton } from '../ProductPage/BackButton'
 
@@ -52,6 +53,26 @@ export function AddNewProduct() {
           ProductPicture: productToModify ? productToModify.pictures : '',
           ProductWight: productToModify ? productToModify.wight : '',
         }}
+        validationSchema={Yup.object({
+          ProductName: Yup
+            .string()
+            .max(150, 'Must be at least 1 character')
+            .required('Required'),
+          ProductPrice: Yup
+            .number()
+            .required()
+            .positive()
+            .integer(),
+          ProductWight: Yup
+            .string()
+            .max(150, 'Must be at least 1 character')
+            .required('Required'),
+          ProductPicture: Yup
+            .string()
+            .url()
+            .nullable()
+            .required(),
+        })}
         onSubmit={async (values) => {
           const product = {
             discount: values.ProductDiscount,
