@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -98,13 +98,10 @@ export function ProductPage() {
     })
   }
 
-  const queryClient = useQueryClient()
-
   const addCommentClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
     setIsModalProductComment(true)
-    queryClient.invalidateQueries()
   }
 
   if (isLoading || isLoadingUser) {

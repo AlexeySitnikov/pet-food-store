@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   Field, Form, Formik,
 } from 'formik'
@@ -12,7 +12,7 @@ import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 
 export function ModalProductComment({ isOpen, closeModal, product }) {
-  const ADDCOMMENT = ['ADDCOMMENT']
+  const ADDCOMMENT = ['ADDCOMMENT'].concat(product)
   // const navigate = useNavigate()
 
   const addCommentFn = async (comment) => {
@@ -23,10 +23,13 @@ export function ModalProductComment({ isOpen, closeModal, product }) {
     api.addComment(product._id, review)
   }
 
+  const queryClient = useQueryClient()
+
   const { mutateAsync: addComment } = useMutation({
     mutationKey: ADDCOMMENT,
     mutationFn: addCommentFn,
     onSuccess: () => {
+      queryClient.invalidateQueries()
       closeModal(!true)
       // navigate('/')
     },
