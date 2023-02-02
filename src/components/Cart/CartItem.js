@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import {
   decreaseProductsQuantity, increacreProductQuantity, removeFromCart, checkWantToBuy,
 } from '../Redux/Slices/productsSlice/productsSlice'
@@ -9,6 +12,7 @@ export function CartItem({ idx, product }) {
   const dispatch = useDispatch()
   const cart = useSelector((store) => store.products)
   const currentProduct = cart.find((item) => item.id === product._id)
+  const navigate = useNavigate()
 
   const increaseProductQuantityHandler = () => {
     if (currentProduct.quantityToBuy < product.stock) {
@@ -30,6 +34,10 @@ export function CartItem({ idx, product }) {
     dispatch(checkWantToBuy(product))
   }
 
+  const showProductClickHandeler = () => {
+    navigate(`/product?id=${product._id}`)
+  }
+
   return (
     <li className="list-group-item d-flex justify-content-between">
       <div>
@@ -48,7 +56,7 @@ export function CartItem({ idx, product }) {
               {' '}
             </span>
             {/* <div /> */}
-            <span>
+            <span onClick={showProductClickHandeler}>
               {product.name}
               {' '}
             </span>

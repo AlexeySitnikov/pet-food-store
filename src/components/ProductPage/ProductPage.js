@@ -104,8 +104,6 @@ export function ProductPage() {
     setIsModalProductComment(true)
   }
 
-  console.log('Product Page Render')
-
   if (isLoading || isLoadingUser) {
     return (
       <>

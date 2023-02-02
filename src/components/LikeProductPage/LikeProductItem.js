@@ -1,6 +1,15 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
 
+import { useNavigate } from 'react-router-dom'
+
 export function LikeProductItem({ idx, product }) {
+  const navigate = useNavigate()
+
+  const showProductClickHandeler = () => {
+    navigate(`/product?id=${product._id}`)
+  }
   return (
     <li className="list-group-item d-flex justify-content-between">
       <div>
@@ -11,7 +20,7 @@ export function LikeProductItem({ idx, product }) {
               .
               {' '}
             </span>
-            <span>
+            <span onClick={showProductClickHandeler}>
               {product.name}
               {' '}
             </span>
