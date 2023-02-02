@@ -154,6 +154,19 @@ class API {
     const result = await response.json()
     return result
   }
+
+  async changeProduct(id, product) {
+    const response = await fetch(`${this.url}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `${this.getToken()}`,
+      },
+      body: JSON.stringify(product),
+    })
+    const result = await response.json()
+    return result
+  }
 }
 
 export const api = new API(BASE_URL)

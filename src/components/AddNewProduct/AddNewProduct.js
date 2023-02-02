@@ -2,20 +2,36 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useMutation } from '@tanstack/react-query'
 import { Field, Form, Formik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { api } from '../API/api'
+import { BackButton } from '../ProductPage/BackButton'
 
 export function AddNewProduct() {
   const navigate = useNavigate()
   const ADDPRODUCT = ['ADDPRODUCT']
+  const CHANGEPRODUCT = ['CHANGEPRODUCT']
+  const location = useLocation()
+  const { product: productToModify } = location.state ?? ''
 
   const addProductFn = async (product) => {
     api.addNewProduct(product)
   }
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: addProduct } = useMutation({
     mutationKey: ADDPRODUCT,
     mutationFn: addProductFn,
+    onSuccess: () => {
+      navigate('/')
+    },
+  })
+
+  const changeProductFn = async (product) => {
+    api.changeProduct(productToModify._id, product)
+  }
+
+  const { mutateAsync: changeProduct } = useMutation({
+    mutationKey: CHANGEPRODUCT,
+    mutationFn: changeProductFn,
     onSuccess: () => {
       navigate('/')
     },
@@ -26,7 +42,12 @@ export function AddNewProduct() {
       <h1 className="d-flex justify-content-center">Add new product page</h1>
       <Formik
         initialValues={{
-          ProductName: '', ProductDiscount: 0, ProductPrice: 0, ProductDiscription: '', ProductPicture: '', ProductWight: '',
+          ProductName: productToModify ? productToModify.name : '',
+          ProductDiscount: productToModify ? productToModify.discount : 0,
+          ProductPrice: productToModify ? productToModify.price : 0,
+          ProductDiscription: productToModify ? productToModify.description : '',
+          ProductPicture: productToModify ? productToModify.pictures : '',
+          ProductWight: productToModify ? productToModify.wight : '',
         }}
         onSubmit={async (values) => {
           const product = {
@@ -39,7 +60,11 @@ export function AddNewProduct() {
             wight: values.ProductWight,
             description: values.ProductDiscription,
           }
-          await mutateAsync(product)
+          if (productToModify) {
+            await changeProduct(product)
+          } else {
+            await addProduct(product)
+          }
         }}
       >
         <Form className="d-flex justify-content-center flex-column">
@@ -61,7 +86,10 @@ export function AddNewProduct() {
           <label htmlFor="ProductWight">Product Wight</label>
           <Field name="ProductWight" type="text" />
 
-          <button className="my-5" type="submit">Add</button>
+          <button className="my-5" type="submit">
+            {`${productToModify ? 'Change' : 'Add'}`}
+          </button>
+          <BackButton />
         </Form>
       </Formik>
     </div>

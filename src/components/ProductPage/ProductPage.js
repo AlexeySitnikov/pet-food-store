@@ -86,6 +86,16 @@ export function ProductPage() {
     await mutateAsync()
   }
 
+  const onRewriteClickHandler = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    navigate('/addnewproduct', {
+      state: {
+        product,
+      },
+    })
+  }
+
   if (isLoading || isLoadingUser) {
     return (
       <>
@@ -106,7 +116,14 @@ export function ProductPage() {
             <span className={`${style.numberCircle}`}>{`${products.length}`}</span>
           </div>
         </button>
-        {(user._id === product.author._id) ? <button type="button" className={`${style.button} px-5 mx-1`} onClick={onTrashCanClickHandler}><img src={`${trash}`} alt="trash" /></button> : null}
+        {(user._id === product.author._id)
+          ? (
+            <div>
+              <button type="button" className={`${style.button} px-5 mx-1`} onClick={onTrashCanClickHandler}><img src={`${trash}`} alt="trash" /></button>
+              <button type="button" className={`${style.button} px-5 mx-1`} onClick={onRewriteClickHandler}>📝</button>
+            </div>
+          )
+          : null}
 
       </div>
       <img className={`${style.img}`} src={product.pictures} alt="Food" />
