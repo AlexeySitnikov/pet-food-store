@@ -1,4 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
+/* eslint-disable no-underscore-dangle */
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../API/api'
 import { RatingStar } from '../RatingStars/RatingStar'
 
@@ -6,10 +8,22 @@ import style from './styles.module.css'
 
 export function ListOfReviews({ review }) {
   const GETUSERBYID = [review.author]
+  const GETME = ['GETME']
+  const DELETECOMMENT = ['DELETECOMMENT']
+  const navigate = useNavigate()
 
   const getAuthorById = async () => {
     const result = await api.getUserDataById(review.author)
     return result
+  }
+
+  const getMyInfo = async () => {
+    const result = await api.getUserData()
+    return result
+  }
+
+  const deleteCommentFn = async () => {
+    await api.deleteComment(review.product, review._id)
   }
 
   const { data: userById, isLoading } = useQuery({
@@ -17,7 +31,20 @@ export function ListOfReviews({ review }) {
     queryFn: getAuthorById,
   })
 
-  if (isLoading) {
+  const { data: userMe, isLoading: isLoadingUserMe } = useQuery({
+    queryKey: GETME,
+    queryFn: getMyInfo,
+  })
+
+  const { mutateAsync: deleteComment } = useMutation({
+    mutationKey: DELETECOMMENT,
+    mutationFn: deleteCommentFn,
+    onSuccess: () => {
+      navigate('/')
+    },
+  })
+
+  if (isLoading || isLoadingUserMe) {
     return null
   }
 
@@ -28,6 +55,7 @@ export function ListOfReviews({ review }) {
         <div className={`${style.reviewAutthor}`}>
           <span>{`${userById.name}`}</span>
         </div>
+        {(userMe._id === userById._id) ? <button type="button" onClick={deleteComment}>Delete comment</button> : null}
         <div className={`${style.reviewComment}`}>
           <span>{`${review.text}`}</span>
           <span>

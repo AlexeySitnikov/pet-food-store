@@ -167,6 +167,30 @@ class API {
     const result = await response.json()
     return result
   }
+
+  async addComment(id, review) {
+    const response = await fetch(`${this.url}/review/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `${this.getToken()}`,
+      },
+      body: JSON.stringify(review),
+    })
+    const result = await response.json()
+    return result
+  }
+
+  async deleteComment(productId, reviewId) {
+    const response = await fetch(`${this.url}/review/${productId}/${reviewId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `${this.getToken()}`,
+      },
+    })
+    const result = await response.json()
+    return result
+  }
 }
 
 export const api = new API(BASE_URL)

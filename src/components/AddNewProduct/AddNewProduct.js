@@ -5,7 +5,7 @@ import { Field, Form, Formik } from 'formik'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../API/api'
-import { BackButton } from '../ProductPage/BackButton'
+import { BackButton } from './BackButton'
 
 export function AddNewProduct() {
   const navigate = useNavigate()

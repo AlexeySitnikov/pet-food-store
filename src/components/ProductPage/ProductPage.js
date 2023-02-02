@@ -13,8 +13,10 @@ import cartLogo from '../Header/cart.png'
 import style from './styles.module.css'
 import { addLike, deleteLike } from '../Redux/Slices/likeProductSlice/likeProductSlice'
 import trash from './trash.png'
+import { ModalProductComment } from './ModalProductComment'
 
 export function ProductPage() {
+  const [isModalProductComment, setIsModalProductComment] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
   const [input] = useState(() => searchParams.get('id') ?? '')
   const GETPRODUCTID = [input]
@@ -96,6 +98,14 @@ export function ProductPage() {
     })
   }
 
+  const addCommentClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsModalProductComment(true)
+  }
+
+  console.log('Product Page Render')
+
   if (isLoading || isLoadingUser) {
     return (
       <>
@@ -141,6 +151,7 @@ export function ProductPage() {
       </h3>
       <div className={`${style.cartButtonDiv}`}>
         <button type="button" className={(productsInCart.findIndex((item) => item.id === product._id) !== -1) ? `${style.in_cart_button}` : `${style.cart_button}`} onClick={addToCartClickHandler}>{(productsInCart.findIndex((item) => item.id === product._id) !== -1) ? '🛒 В корзине' : '🛒 В корзину'}</button>
+        <button type="button" onClick={addCommentClickHandler}>Add comment</button>
       </div>
       <hr />
       <h4 className={`${style.productDiscription}`}>
@@ -152,6 +163,13 @@ export function ProductPage() {
         {product.reviews.map((review) => (
           <ListOfReviews key={crypto.randomUUID()} review={review} />
         ))}
+      </div>
+      <div>
+        <ModalProductComment
+          isOpen={isModalProductComment}
+          closeModal={setIsModalProductComment}
+          product={product}
+        />
       </div>
     </div>
   )
