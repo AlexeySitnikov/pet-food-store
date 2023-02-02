@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+// import { useNavigate } from 'react-router-dom'
 import { api } from '../API/api'
 import { RatingStar } from '../RatingStars/RatingStar'
 
@@ -10,7 +10,7 @@ export function ListOfReviews({ review }) {
   const GETUSERBYID = [review.author]
   const GETME = ['GETME']
   const DELETECOMMENT = ['DELETECOMMENT']
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const getAuthorById = async () => {
     const result = await api.getUserDataById(review.author)
@@ -36,11 +36,14 @@ export function ListOfReviews({ review }) {
     queryFn: getMyInfo,
   })
 
+  const queryClient = useQueryClient()
+
   const { mutateAsync: deleteComment } = useMutation({
     mutationKey: DELETECOMMENT,
     mutationFn: deleteCommentFn,
     onSuccess: () => {
-      navigate('/')
+      // navigate('/')
+      queryClient.invalidateQueries()
     },
   })
 

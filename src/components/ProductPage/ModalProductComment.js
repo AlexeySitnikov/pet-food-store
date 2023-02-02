@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import {
   Field, Form, Formik,
 } from 'formik'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../API/api'
 
@@ -13,7 +13,7 @@ import editUserStyles from './userEdit.module.css'
 
 export function ModalProductComment({ isOpen, closeModal, product }) {
   const ADDCOMMENT = ['ADDCOMMENT']
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const addCommentFn = async (comment) => {
     const review = {
@@ -28,7 +28,7 @@ export function ModalProductComment({ isOpen, closeModal, product }) {
     mutationFn: addCommentFn,
     onSuccess: () => {
       closeModal(!true)
-      navigate('/')
+      // navigate('/')
     },
   })
 

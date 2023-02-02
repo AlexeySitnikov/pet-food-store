@@ -4,7 +4,7 @@ import style from './styles.module.css'
 export function BackButton() {
   const navigate = useNavigate()
   const backHandler = () => {
-    navigate(-1)
+    navigate('/')
   }
 
   return (
