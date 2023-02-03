@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
-// import { useSearchParams } from 'react-router-dom'
-
-// import { api } from '../API/api'
 import { ProductsList } from '../ProductsList/ProductsList'
 import { SearchBar } from '../SearchBar/SearchBar'
 import styles from './mainPage.module.css'
@@ -151,10 +148,8 @@ export function Main() {
     return (
       <>
         <SearchBar searchParams={searchParams} setSearchParams={setSearchParams} />
-        <div className="container">
-          <div className={`${styles.mainPage} justify-content-center align-items-center`}>
-            <ProductsList products={products} />
-          </div>
+        <div className={`${styles.mainPage}`}>
+          <ProductsList products={products} />
         </div>
       </>
     )

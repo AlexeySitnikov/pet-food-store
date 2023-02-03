@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -51,32 +52,38 @@ export function Header() {
 
   const showUser = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsModalUserInfoOpen(true)
   }
 
   const showCart = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     navigate('/cart')
   }
 
   const showLikeProducts = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     navigate('/likeList')
   }
 
   const logoClichHandler = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     navigate('/')
   }
 
-  const searchProductHandler = () => {
-    // querySearchProductByName(debounceValue)
-  }
+  // const searchProductHandler = () => {
+  //   // querySearchProductByName(debounceValue)
+  // }
+
   if (query.isLoading) { return null }
+
   if (!query.isLoading && !query.isError) {
     return (
       <>
-        <div className={`${styles.header} d-flex my-5 align-self-center align-items-center`}>
+        <div className={`${styles.header}`}>
           <div className="me-auto p-2">
             <img className={`${styles.header__logo}`} src={`${logo}`} alt="logo" onClick={logoClichHandler} />
           </div>
@@ -88,12 +95,13 @@ export function Header() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
-              <button type="submit" onSubmit={searchProductHandler}>Искать</button>
+              <label>🔍</label>
+              {/* <button type="submit" onSubmit={searchProductHandler}>Искать</button> */}
             </form>
           </div>
           <div className={`${styles.header__control}`}>
             <div>
-              <span onClick={showLikeProducts} className={`${styles.like} px-5 mx-1`}>♥</span>
+              <span onClick={showLikeProducts} className={`${styles.like}`}>♥</span>
             </div>
             <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
 

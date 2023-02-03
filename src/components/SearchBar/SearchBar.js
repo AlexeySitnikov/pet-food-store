@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import styles from './searchBar.module.css'
 
 export function SearchBar({ searchParams, setSearchParams }) {
   const navigate = useNavigate()
@@ -50,35 +51,34 @@ export function SearchBar({ searchParams, setSearchParams }) {
   }
 
   return (
-    <div className="d-flex justify-content-center py-5 align-items-center">
-      <span>Sort by</span>
-      <button type="button" className="mx-1" onClick={sortByNameClickHandler}>
+    <div className={`${styles.main}`}>
+      <span className={`${styles.sortBy}`}>Sort by:</span>
+      <button type="button" onClick={sortByNameClickHandler}>
         Name
         {searchParams.get('sort') === 'by_name=AZ' ? '↑' : ''}
         {searchParams.get('sort') === 'by_name=ZA' ? '↓' : ''}
       </button>
-      <button type="button" className="mx-1" onClick={sortByPriceClickHandler}>
+      <button type="button" onClick={sortByPriceClickHandler}>
         Price
         {searchParams.get('sort') === 'by_price=tolow' ? '↑' : ''}
         {searchParams.get('sort') === 'by_price=tohigh' ? '↓' : ''}
       </button>
-      <button type="button" className="mx-1" onClick={sortByDiscountClickHandler}>
+      <button type="button" onClick={sortByDiscountClickHandler}>
         Discount
         {searchParams.get('sort') === 'by_discount=tolow' ? '↑' : ''}
         {searchParams.get('sort') === 'by_discount=tohigh' ? '↓' : ''}
       </button>
-      <button type="button" className="mx-1" onClick={sortByRatingClickHandler}>
+      <button type="button" onClick={sortByRatingClickHandler}>
         Rating
         {searchParams.get('sort') === 'by_rating=tolow' ? '↑' : ''}
         {searchParams.get('sort') === 'by_rating=tohigh' ? '↓' : ''}
       </button>
-      <button type="button" className="mx-1" onClick={sortByCreateDateClickHandler}>
-        Date
-        <p>Updated</p>
+      <button type="button" onClick={sortByCreateDateClickHandler}>
+        Date Updated
         {searchParams.get('sort') === 'by_date=tolow' ? '↑' : ''}
         {searchParams.get('sort') === 'by_date=tohigh' ? '↓' : ''}
       </button>
-      <button type="button" className="mx-1" onClick={addNewProductClickHandler}>Add new product</button>
+      <button type="button" onClick={addNewProductClickHandler}>Add new product</button>
     </div>
   )
 }
