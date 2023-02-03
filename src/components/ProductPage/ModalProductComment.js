@@ -29,7 +29,7 @@ export function ModalProductComment({ isOpen, closeModal, product }) {
     mutationKey: ADDCOMMENT,
     mutationFn: addCommentFn,
     onSuccess: () => {
-      queryClient.invalidateQueries()
+      queryClient.invalidateQueries(product)
       closeModal(!true)
       // navigate('/')
     },
@@ -53,7 +53,7 @@ export function ModalProductComment({ isOpen, closeModal, product }) {
             comment: '',
           }}
           validationSchema={Yup.object({
-            comment: Yup.string().min(1, 'Must be at least 1 character'),
+            comment: Yup.string().min(1, 'Must be at least 1 character').required('Required'),
           })}
           onSubmit={async (values) => {
             await addComment(values.comment)

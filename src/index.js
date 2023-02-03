@@ -28,31 +28,31 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: 'cart',
+        element: <Cart />,
+      },
+      {
+        path: 'order',
+        element: <Order />,
+      },
+      {
+        path: 'product',
+        element: <ProductPage />,
+      },
+      {
+        path: 'likeList',
+        element: <LikeProductPage />,
+      },
+      {
+        path: 'addnewproduct',
+        element: <AddNewProduct />,
+      },
     ],
   },
   {
     path: 'login',
     element: <LogInPage />,
-  },
-  {
-    path: 'cart',
-    element: <Cart />,
-  },
-  {
-    path: 'order',
-    element: <Order />,
-  },
-  {
-    path: 'product',
-    element: <ProductPage />,
-  },
-  {
-    path: 'likeList',
-    element: <LikeProductPage />,
-  },
-  {
-    path: 'addnewproduct',
-    element: <AddNewProduct />,
   },
 ])
 

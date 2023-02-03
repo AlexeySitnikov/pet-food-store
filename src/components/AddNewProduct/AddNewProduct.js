@@ -18,6 +18,7 @@ export function AddNewProduct() {
     api.addNewProduct(product)
   }
 
+  // eslint-disable-next-line no-unused-vars
   const { mutateAsync: addProduct } = useMutation({
     mutationKey: ADDPRODUCT,
     mutationFn: addProductFn,
@@ -30,6 +31,7 @@ export function AddNewProduct() {
     api.changeProduct(productToModify._id, product)
   }
 
+  // eslint-disable-next-line no-unused-vars
   const { mutateAsync: changeProduct } = useMutation({
     mutationKey: CHANGEPRODUCT,
     mutationFn: changeProductFn,
@@ -56,13 +58,13 @@ export function AddNewProduct() {
         validationSchema={Yup.object({
           ProductName: Yup
             .string()
-            .max(150, 'Must be at least 1 character')
-            .required('Required'),
+            .min(1, 'Must be at least 1 character')
+            .required(),
           ProductPrice: Yup
             .number()
-            .required()
             .positive()
-            .integer(),
+            .integer()
+            .required('asd'),
           ProductWight: Yup
             .string()
             .max(150, 'Must be at least 1 character')
