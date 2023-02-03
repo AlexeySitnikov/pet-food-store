@@ -6,7 +6,9 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgb(96, 241, 83);
+  /* background-color: rgb(96, 241, 83); */
+  background-color: #fff;
+  border: #666 2px solid;
   transition: box-shadow, background-color .25s ease;
 }
 
@@ -19,13 +21,12 @@ padding: 0;
 .header button{
   font-family: 'Raleway', sans-serif;
   font-size: 15px;
-  color: #fff;
-  background-color: #23a030;
+  color: #000;
+  background-color: #23a03086;
   border: none;
   border-radius: 15px;
   cursor: pointer;
   box-shadow: 0 16px 36px rgb(52, 213, 68, 0.22);
-  padding: 15px;
 }
 
 .header button:hover{
@@ -35,22 +36,31 @@ padding: 0;
 }
 
 .numberCircle {
-  border-radius: 50%;
+  /* border-radius: 100%;
   width: 24px;
   height: 24px;
   padding: 4px;
   background: rgb(245, 4, 4);
-  border: 2px solid #666;
-  color: rgb(247, 244, 244);
+  /* border: 2px solid #666; */
+  /* color: rgb(247, 244, 244);
   text-align: center;
-  font: 12px Arial, sans-serif;
+  font: 12px Arial, sans-serif; */ 
+  font-size: 11px;
+border-radius: 100%;
+text-align: center;
+background: rgb(245, 4, 4);
+color: #fff;
+width: 20px;
+height: 20px;
+display: inline-block;
+line-height: 20px;
 }
 
 .like{
   margin: 0;
   padding-left: 20px;
   padding-right: 20px;
-  font-size: 50px;
+  font-size: 40px;
   color: rgba(255, 0, 0, 0.6);
   cursor: pointer;
   transition: transform 0.3s ease-out;
@@ -58,9 +68,30 @@ padding: 0;
 
 .like:hover{
   color: rgb(255, 0, 0);
-  transition: font-size 1s; 
+  transition: color 1s; 
 }
 
 .header__control{
   display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.header__control button{
+  padding: 0;
+  margin: 5px;
+  width:80px;
+  height: 40px;
+  font-size: 12px;
+}
+
+.cart{
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartSymbol{
+  font-size: 30px;
 }

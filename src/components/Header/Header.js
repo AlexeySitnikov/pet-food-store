@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
-import cart from './cart.png'
+// import cart from './cart.png'
 import { useDebounce } from '../hooks/useDebounce'
 import { changeProductNameForSearch } from '../Redux/Slices/searchProductByNameSlice/searchProductByNameSlice'
 
@@ -103,13 +103,16 @@ export function Header() {
             <div>
               <span onClick={showLikeProducts} className={`${styles.like}`}>♥</span>
             </div>
-            <button type="button" onClick={showUser} className={`${styles.button} px-5 mx-1`}>{query.data.name}</button>
+            <button type="button" onClick={showUser}>{query.data.name}</button>
 
-            <button type="button" onClick={showCart} className={`${styles.button} px-5 mx-1`}>
-              <div>
-                Cart
-                <img src={`${cart}`} alt="cart" />
-                <span className={`${styles.numberCircle}`}>{`${products.length}`}</span>
+            <button type="button" onClick={showCart}>
+              <div className={`${styles.cart}`}>
+                <div className={`${styles.cartSymbol}`}>
+                  <span>🛒</span>
+                </div>
+                <div className={`${styles.numberCircle}`}>
+                  <span>{`${products.length}`}</span>
+                </div>
               </div>
             </button>
 
