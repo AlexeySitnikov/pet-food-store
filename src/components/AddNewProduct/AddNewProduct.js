@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useMutation } from '@tanstack/react-query'
-import { Field, Form, Formik } from 'formik'
+import {
+  ErrorMessage, Field, Form, Formik,
+} from 'formik'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../API/api'
@@ -96,12 +98,15 @@ export function AddNewProduct() {
         <Form className="d-flex justify-content-center flex-column">
           <label htmlFor="ProductName">Product Name</label>
           <Field name="ProductName" type="text" placeholder="Product Name" />
+          <ErrorMessage name="ProductName" />
 
           <label htmlFor="ProductPrice">Product Price</label>
           <Field name="ProductPrice" type="number" />
+          <ErrorMessage name="ProductPrice" />
 
           <label htmlFor="ProductPicture">Product Picture</label>
           <Field name="ProductPicture" type="url" placeholder="url" />
+          <ErrorMessage name="ProductPicture" />
 
           <label htmlFor="ProductDiscription">Product Discription</label>
           <Field name="ProductDiscription" type="textarea" placeholder="something about product" />
@@ -111,6 +116,7 @@ export function AddNewProduct() {
 
           <label htmlFor="ProductWight">Product Wight</label>
           <Field name="ProductWight" type="text" />
+          <ErrorMessage name="ProductWight" />
 
           <button className="my-5" type="submit">
             {`${productToModify ? 'Change' : 'Add'}`}

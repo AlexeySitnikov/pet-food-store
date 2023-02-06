@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import {
+  ErrorMessage,
   Field, Form, Formik,
 } from 'formik'
 import { useState } from 'react'
@@ -47,7 +48,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
     await mutateAsync()
   }
 
-  const emptyFunction = () => {}
+  // const emptyFunction = () => {}
 
   return (
     <div className={isOpen ? `${styles.modal} ${styles.active}` : `${styles.modal}`}>
@@ -67,7 +68,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
           validationSchema={Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
           })}
-          onsubmit={emptyFunction()}
+          onsubmit={needToChangeClickHandled}
         >
           <Form className={editUserStyles.editForm}>
 
@@ -87,6 +88,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
                 setUserEmail(e.target.value)
               }}
             />
+            <ErrorMessage name="email" />
             <button
               type="submit"
               className="btn btn-primary"
@@ -98,7 +100,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
               type="submit"
               className="btn btn-primary"
               disabled={((initialName === userName) && (initialEmail === userEmail))}
-              onClick={needToChangeClickHandled}
+              onSubmit={needToChangeClickHandled}
             >
               Change
             </button>
