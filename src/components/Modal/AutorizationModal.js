@@ -55,6 +55,7 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
           validationSchema={Yup.object(
             {
               email: Yup.string().email('Invalid email address').required('email'),
+              password: Yup.string().min(6, 'Must be at least 6 character').required('Required'),
             },
           )}
           onSubmit={async (values) => {
