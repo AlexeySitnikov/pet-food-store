@@ -74,6 +74,12 @@ export function Header() {
     navigate('/')
   }
 
+  const addNewProductClickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    navigate('/addnewproduct')
+  }
+
   // const searchProductHandler = () => {
   //   // querySearchProductByName(debounceValue)
   // }
@@ -102,6 +108,9 @@ export function Header() {
           <div className={`${styles.header__control}`}>
             <div>
               <span onClick={showLikeProducts} className={`${styles.like}`}>♥</span>
+            </div>
+            <div>
+              <button type="button" onClick={addNewProductClickHandler}>Add new product</button>
             </div>
             <button type="button" onClick={showUser}>{query.data.name}</button>
 

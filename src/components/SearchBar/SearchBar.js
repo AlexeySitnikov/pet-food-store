@@ -1,9 +1,6 @@
-import { useNavigate } from 'react-router-dom'
 import styles from './searchBar.module.css'
 
 export function SearchBar({ searchParams, setSearchParams }) {
-  const navigate = useNavigate()
-
   const sortByNameClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -44,12 +41,6 @@ export function SearchBar({ searchParams, setSearchParams }) {
     } else { setSearchParams({ sort: 'by_date=tolow' }) }
   }
 
-  const addNewProductClickHandler = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    navigate('/addnewproduct')
-  }
-
   return (
     <div className={`${styles.main}`}>
       <span className={`${styles.sortBy}`}>Sort by:</span>
@@ -78,7 +69,6 @@ export function SearchBar({ searchParams, setSearchParams }) {
         {searchParams.get('sort') === 'by_date=tolow' ? '↑' : ''}
         {searchParams.get('sort') === 'by_date=tohigh' ? '↓' : ''}
       </button>
-      <button type="button" onClick={addNewProductClickHandler}>Add new product</button>
     </div>
   )
 }
