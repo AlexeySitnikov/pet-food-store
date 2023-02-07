@@ -12,6 +12,10 @@
   transition: box-shadow, background-color .25s ease;
 }
 
+.displayNone{
+  display: none;
+}
+
 .header__logo{
 height: 250px;
 margin: 0;

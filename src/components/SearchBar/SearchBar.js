@@ -1,44 +1,69 @@
 import styles from './searchBar.module.css'
 
 export function SearchBar({ searchParams, setSearchParams }) {
+  const params = {
+    query: searchParams.get('query') ?? '',
+    sort: searchParams.get('sort') ?? '',
+  }
+
   const sortByNameClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    if (searchParams.get('sort') === 'by_name=AZ') {
-      setSearchParams({ sort: 'by_name=ZA' })
-    } else { setSearchParams({ sort: 'by_name=AZ' }) }
+    if (params.sort === 'by_name=AZ') {
+      params.sort = 'by_name=ZA'
+      setSearchParams(params)
+    } else {
+      params.sort = 'by_name=AZ'
+      setSearchParams(params)
+    }
   }
 
   const sortByPriceClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    if (searchParams.get('sort') === 'by_price=tolow') {
-      setSearchParams({ sort: 'by_price=tohigh' })
-    } else { setSearchParams({ sort: 'by_price=tolow' }) }
+    if (params.sort === 'by_price=tolow') {
+      params.sort = 'by_price=tohigh'
+      setSearchParams(params)
+    } else {
+      params.sort = 'by_price=tolow'
+      setSearchParams(params)
+    }
   }
 
   const sortByDiscountClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    if (searchParams.get('sort') === 'by_discount=tolow') {
-      setSearchParams({ sort: 'by_discount=tohigh' })
-    } else { setSearchParams({ sort: 'by_discount=tolow' }) }
+    if (params.sort === 'by_discount=tolow') {
+      params.sort = 'by_discount=tohigh'
+      setSearchParams(params)
+    } else {
+      params.sort = 'by_discount=tolow'
+      setSearchParams(params)
+    }
   }
 
   const sortByRatingClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    if (searchParams.get('sort') === 'by_rating=tolow') {
-      setSearchParams({ sort: 'by_rating=tohigh' })
-    } else { setSearchParams({ sort: 'by_rating=tolow' }) }
+    if (params.sort === 'by_rating=tolow') {
+      params.sort = 'by_rating=tohigh'
+      setSearchParams(params)
+    } else {
+      params.sort = 'by_rating=tolow'
+      setSearchParams(params)
+    }
   }
 
   const sortByCreateDateClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    if (searchParams.get('sort') === 'by_date=tolow') {
-      setSearchParams({ sort: 'by_date=tohigh' })
-    } else { setSearchParams({ sort: 'by_date=tolow' }) }
+    if (params.sort === 'by_date=tolow') {
+      params.sort = 'by_date=tohigh'
+      setSearchParams(params)
+    } else {
+      params.sort = 'by_date=tolow'
+      setSearchParams(params)
+    }
   }
 
   return (

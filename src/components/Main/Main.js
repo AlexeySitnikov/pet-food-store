@@ -16,10 +16,12 @@ import styles from './mainPage.module.css'
 // }
 
 export function Main() {
-  const searchProducts = useSelector((store) => store.productsNameToSearch)
+  // const searchProducts = useSelector((store) => store.productsNameToSearch)
   const token = useSelector((store) => store.token)
 
   const [searchParams, setSearchParams] = useSearchParams()
+
+  const searchProducts = searchParams.get('query') ?? ''
 
   let GETPRODUCTS = []
   let url = ''

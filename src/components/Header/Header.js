@@ -6,12 +6,11 @@
 /* eslint-disable react/self-closing-comp */
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModalUser } from '../Modal/ModalUser'
 import styles from './headerStyles.module.css'
 import logo from './Header_logo.jpg'
-// import cart from './cart.png'
 import { useDebounce } from '../hooks/useDebounce'
 import { changeProductNameForSearch } from '../Redux/Slices/searchProductByNameSlice/searchProductByNameSlice'
 
@@ -19,20 +18,26 @@ export function Header() {
   const [isModalUserInfoOpen, setIsModalUserInfoOpen] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
   const token = useSelector((store) => store.token)
   const products = useSelector((store) => store.products)
-
   const [searchParams, setSearchParams] = useSearchParams()
-  const [input, setInput] = useState(() => searchParams.get('query') ?? '')
+  let params = {
+    query: searchParams.get('query') ?? '',
+    sort: searchParams.get('sort') ?? '',
+  }
+
+  const [input, setInput] = useState(() => params.query)
   const debounceValue = useDebounce(input, 300)
+  params.query = debounceValue
 
   useEffect(() => {
-    dispatch(changeProductNameForSearch(debounceValue))
+    dispatch(changeProductNameForSearch(params))
   }, [debounceValue])
 
   useEffect(() => {
-    setSearchParams({ query: input })
-  }, [input])
+    setSearchParams(params)
+  }, [debounceValue])
 
   const GETUSERINFO = ['GETUSERINFO'].concat(isModalUserInfoOpen)
   const getUserInfo = async () => {
@@ -71,6 +76,12 @@ export function Header() {
   const logoClichHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
+    params = {
+      query: '',
+      sort: '',
+    }
+    setSearchParams(params)
+    setInput(params.query)
     navigate('/')
   }
 
@@ -93,7 +104,7 @@ export function Header() {
           <div className="me-auto p-2">
             <img className={`${styles.header__logo}`} src={`${logo}`} alt="logo" onClick={logoClichHandler} />
           </div>
-          <div className="d1">
+          <div className={`${location.pathname === '/' ? '' : styles.displayNone}`}>
             <form>
               <input
                 type="text"
