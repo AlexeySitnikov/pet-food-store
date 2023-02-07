@@ -69,31 +69,41 @@ export function SearchBar({ searchParams, setSearchParams }) {
   return (
     <div className={`${styles.main}`}>
       <span className={`${styles.sortBy}`}>Sort by:</span>
-      <button type="button" onClick={sortByNameClickHandler}>
-        Name
-        {searchParams.get('sort') === 'by_name=AZ' ? '↑' : ''}
-        {searchParams.get('sort') === 'by_name=ZA' ? '↓' : ''}
-      </button>
-      <button type="button" onClick={sortByPriceClickHandler}>
-        Price
-        {searchParams.get('sort') === 'by_price=tolow' ? '↑' : ''}
-        {searchParams.get('sort') === 'by_price=tohigh' ? '↓' : ''}
-      </button>
-      <button type="button" onClick={sortByDiscountClickHandler}>
-        Discount
-        {searchParams.get('sort') === 'by_discount=tolow' ? '↑' : ''}
-        {searchParams.get('sort') === 'by_discount=tohigh' ? '↓' : ''}
-      </button>
-      <button type="button" onClick={sortByRatingClickHandler}>
-        Rating
-        {searchParams.get('sort') === 'by_rating=tolow' ? '↑' : ''}
-        {searchParams.get('sort') === 'by_rating=tohigh' ? '↓' : ''}
-      </button>
-      <button type="button" onClick={sortByCreateDateClickHandler}>
-        Date Updated
-        {searchParams.get('sort') === 'by_date=tolow' ? '↑' : ''}
-        {searchParams.get('sort') === 'by_date=tohigh' ? '↓' : ''}
-      </button>
+      <div className={`${params.sort.includes('by_name') ? styles.sortByButton : ''}`}>
+        <button type="button" onClick={sortByNameClickHandler}>
+          Name
+          {params.sort === 'by_name=AZ' ? '↑' : ''}
+          {params.sort === 'by_name=ZA' ? '↓' : ''}
+        </button>
+      </div>
+      <div className={`${params.sort.includes('by_price') ? styles.sortByButton : ''}`}>
+        <button type="button" onClick={sortByPriceClickHandler}>
+          Price
+          {params.sort === 'by_price=tolow' ? '↑' : ''}
+          {params.sort === 'by_price=tohigh' ? '↓' : ''}
+        </button>
+      </div>
+      <div className={`${params.sort.includes('by_discount') ? styles.sortByButton : ''}`}>
+        <button type="button" onClick={sortByDiscountClickHandler}>
+          Discount
+          {params.sort === 'by_discount=tolow' ? '   ↑' : ''}
+          {params.sort === 'by_discount=tohigh' ? '   ↓' : ''}
+        </button>
+      </div>
+      <div className={`${params.sort.includes('by_rating') ? styles.sortByButton : ''}`}>
+        <button type="button" onClick={sortByRatingClickHandler}>
+          Rating
+          {params.sort === 'by_rating=tolow' ? '↑' : ''}
+          {params.sort === 'by_rating=tohigh' ? '↓' : ''}
+        </button>
+      </div>
+      <div className={`${params.sort.includes('by_date') ? styles.sortByButton : ''}`}>
+        <button type="button" onClick={sortByCreateDateClickHandler}>
+          Date Updated
+          {params.sort === 'by_date=tolow' ? '↑' : ''}
+          {params.sort === 'by_date=tohigh' ? '↓' : ''}
+        </button>
+      </div>
     </div>
   )
 }

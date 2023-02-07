@@ -15,9 +15,10 @@ export function AddNewProduct() {
   const CHANGEPRODUCT = ['CHANGEPRODUCT']
   const location = useLocation()
   const { product: productToModify } = location.state ?? ''
+  let productId
 
   const addProductFn = async (product) => {
-    api.addNewProduct(product)
+    productId = await api.addNewProduct(product)
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -25,12 +26,12 @@ export function AddNewProduct() {
     mutationKey: ADDPRODUCT,
     mutationFn: addProductFn,
     onSuccess: () => {
-      navigate('/')
+      navigate(`/product?id=${productId._id}`)
     },
   })
 
   const changeProductFn = async (product) => {
-    api.changeProduct(productToModify._id, product)
+    productId = await api.changeProduct(productToModify._id, product)
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -38,7 +39,7 @@ export function AddNewProduct() {
     mutationKey: CHANGEPRODUCT,
     mutationFn: changeProductFn,
     onSuccess: () => {
-      navigate('/')
+      navigate(`/product?id=${productId._id}`)
     },
   })
 
@@ -76,6 +77,9 @@ export function AddNewProduct() {
             .url()
             .nullable()
             .required(),
+          ProductDiscription: Yup
+            .string()
+            .required(),
         })}
         onSubmit={async (values) => {
           const product = {
@@ -110,6 +114,7 @@ export function AddNewProduct() {
 
           <label htmlFor="ProductDiscription">Product Discription</label>
           <Field name="ProductDiscription" type="textarea" placeholder="something about product" />
+          <ErrorMessage name="ProductDiscription" />
 
           <label htmlFor="ProductDiscount">Product Discount</label>
           <Field name="ProductDiscount" type="number" />

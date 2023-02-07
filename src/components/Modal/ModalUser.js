@@ -4,9 +4,11 @@ import {
   Field, Form, Formik,
 } from 'formik'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../API/api'
+import { setToken } from '../Redux/Slices/tokenSlice/tokenSlice'
 
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
@@ -18,6 +20,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
   const [userEmail, setUserEmail] = useState(initialEmail)
   const CHANGE_USER_DATA_QUERY = ['CHANGE_USER_DATA_QUERY']
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const loginFn = async () => {
     const result = await api.changeUserData(userName, userInfo.about)
@@ -46,6 +49,12 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
 
   const needToChangeClickHandled = async () => {
     await mutateAsync()
+  }
+
+  const exitClickHandled = () => {
+    dispatch(setToken(''))
+    navigate('/')
+    closeModal(!true)
   }
 
   // const emptyFunction = () => {}
@@ -103,6 +112,13 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
               onSubmit={needToChangeClickHandled}
             >
               Change
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={exitClickHandled}
+            >
+              Exit
             </button>
           </Form>
         </Formik>

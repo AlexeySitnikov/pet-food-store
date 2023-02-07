@@ -35,3 +35,7 @@
   font-weight: 700;
   margin-right: 10px;
 }
+
+.sortByButton button{
+  background-color: #ee7605;
+}
