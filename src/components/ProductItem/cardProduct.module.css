@@ -66,11 +66,8 @@ margin: 20px;
   height: 30px;
   line-height: 30px;
 }
-.actions::after {
-  content: "";
-  display: table;
-  clear: both;
-}
+
+
 .add_to_cart, .add_to_links {
   float: left;
 }
