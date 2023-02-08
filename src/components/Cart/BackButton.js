@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 export function BackButton() {
   const navigate = useNavigate()
   const backHandler = () => {
-    navigate(-1)
+    navigate('/')
   }
 
   return (

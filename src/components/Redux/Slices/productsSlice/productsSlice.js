@@ -46,6 +46,14 @@ export const productsSlice = createSlice({
       const currentProduct = state.find((product) => product.id === action.payload._id)
       currentProduct.wantToBuy = !currentProduct.wantToBuy
     },
+    setWantToBuy: (state, action) => {
+      const currentProduct = state.find((product) => product.id === action.payload.id)
+      currentProduct.wantToBuy = true
+    },
+    setDontWantToBuy: (state, action) => {
+      const currentProduct = state.find((product) => product.id === action.payload.id)
+      currentProduct.wantToBuy = false
+    },
   },
 })
 
@@ -56,6 +64,8 @@ export const {
   increacreProductQuantity,
   decreaseProductsQuantity,
   checkWantToBuy,
+  setWantToBuy,
+  setDontWantToBuy,
 } = productsSlice.actions
 
 export const productsReducer = productsSlice.reducer

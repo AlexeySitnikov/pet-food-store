@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-underscore-dangle */
 import { useQuery } from '@tanstack/react-query'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { api } from '../API/api'
-// import { checkWantToBuy } from '../Redux/Slices/productsSlice/productsSlice'
+import { setDontWantToBuy, setWantToBuy } from '../Redux/Slices/productsSlice/productsSlice'
 import { BackButton } from './BackButton'
 import { CartItem } from './CartItem'
 import { ClearCartButton } from './ClearCartButton'
@@ -15,8 +16,9 @@ export function Cart() {
     queryKey: ['Products'].concat(cart.map((item) => item.id)),
     queryFn: () => api.getProductsByIds(cart.map((product) => product.id)),
   })
-  // const dispatch = useDispatch()
   const products = productsFromQuery ?? []
+  const dispatch = useDispatch()
+  const selectAllValue = cart.every((element) => element.wantToBuy)
 
   // фунция filter возвращает массив, в котором только эл-менты из корзины
   // (которые нужны для покупки).
@@ -45,9 +47,17 @@ export function Cart() {
     totalPrice += productsToBuy[i].price * productsToBuy[i].quantityToBuy
   }
 
-  // const selectAllClickHandler = (e) => {
-  //   products.forEach((product) => dispatch(checkWantToBuy(product)))
-  // }
+  const selectAllClickHandler = (e) => {
+    if (e.target.checked) {
+      cart.forEach((element) => {
+        dispatch(setWantToBuy(element))
+      })
+    } else {
+      cart.forEach((element) => {
+        dispatch(setDontWantToBuy(element))
+      })
+    }
+  }
 
   if (!products.length) {
     return (
@@ -60,10 +70,10 @@ export function Cart() {
   }
   return (
     <>
-      {/* <form autoComplete="off" style={{ margin: '10px' }}>
-        <input type="checkbox" name="selectAll" onClick={selectAllClickHandler} value />
-        <span>Select All</span>
-      </form> */}
+      <div>
+        <input type="checkbox" name="selectAll" onChange={selectAllClickHandler} checked={selectAllValue} />
+        <label htmlFor="selectAll">Select All</label>
+      </div>
       <div className={`${styles.container}`}>
         <div className={`${styles.listOfProducts}`}>
           <ul className="list-group">
