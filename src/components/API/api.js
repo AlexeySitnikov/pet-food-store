@@ -59,8 +59,7 @@ class API {
       },
       body: JSON.stringify(USER),
     })
-    const result = await response.json()
-    return result.token
+    return response
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -77,8 +76,7 @@ class API {
       },
       body: JSON.stringify(userForAutorization),
     })
-    const result = await response.json()
-    return result
+    return response
   }
 
   async getUserData() {

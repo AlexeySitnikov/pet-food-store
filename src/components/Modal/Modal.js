@@ -16,7 +16,13 @@ export function Modal({ isOpen, closeModal }) {
   const dispatch = useDispatch()
 
   const loginFn = async () => {
-    dispatch(setToken(await api.getLogIn(USER.email, USER.password)))
+    const response = await api.getLogIn(USER.email, USER.password)
+    const result = await response.json()
+    if (response.status === 401) {
+      alert(result.message)
+      throw new Error(result.message)
+    }
+    dispatch(setToken(result.token))
   }
 
   const navigate = useNavigate()

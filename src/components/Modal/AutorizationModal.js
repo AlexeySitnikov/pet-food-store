@@ -19,16 +19,27 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
   const navigate = useNavigate()
   const REGISTRATION_QUERY = ['REGISTRATION_QUERY']
   const registerFn = async () => {
-    await api.getAutorization(UserData.email, UserData.password, UserData.group)
+    const response = await api.getAutorization(UserData.email, UserData.password, UserData.group)
+    // console.log({ response })
+    if (response.status === 409) {
+      const result = await response.json()
+      alert(result.message)
+      throw new Error(result.message)
+    }
   }
   const dispatch = useDispatch()
 
   const { mutateAsync } = useMutation({
     mutationKey: REGISTRATION_QUERY,
     mutationFn: registerFn,
+    onError: async () => {
+      setIsModalAutorizationOpen(!true)
+      navigate('/')
+    },
     onSuccess: async () => {
-      const token = await api.getLogIn(UserData.email, UserData.password)
-      dispatch(setToken(token))
+      const response = await api.getLogIn(UserData.email, UserData.password)
+      const result = await response.json()
+      dispatch(setToken(result.token))
       setIsModalAutorizationOpen(!true)
       navigate('/')
     },
@@ -55,7 +66,7 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
           validationSchema={Yup.object(
             {
               email: Yup.string().email('Invalid email address').required('email'),
-              password: Yup.string().min(6, 'Must be at least 6 character').required('Required'),
+              password: Yup.string().min(5, 'Must be at least 5 character').required('Required'),
             },
           )}
           onSubmit={async (values) => {
