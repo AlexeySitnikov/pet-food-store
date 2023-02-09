@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../API/api'
-import { getToken } from '../Redux/Slices/tokenSlice/tokenSlice'
+import { setToken } from '../Redux/Slices/tokenSlice/tokenSlice'
 import styles from './modal.module.css'
 import editUserStyles from './userEdit.module.css'
 
@@ -27,8 +27,8 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
     mutationKey: REGISTRATION_QUERY,
     mutationFn: registerFn,
     onSuccess: async () => {
-      await api.getLogIn(UserData.email, UserData.password)
-      dispatch(getToken())
+      const token = await api.getLogIn(UserData.email, UserData.password)
+      dispatch(setToken(token))
       setIsModalAutorizationOpen(!true)
       navigate('/')
     },
@@ -72,6 +72,7 @@ export function AutorizationModal({ isModalAutorizationOpen, setIsModalAutorizat
             <Field name="group" placeholder="Group" type="text" />
 
             <Field name="password" placeholder="Password" type="password" />
+            <ErrorMessage component="span" className={editUserStyles.error} name="password" />
 
             <button type="submit" className="btn btn-primary">Register</button>
           </Form>
