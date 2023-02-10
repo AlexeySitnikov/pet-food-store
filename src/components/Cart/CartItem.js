@@ -35,7 +35,7 @@ export function CartItem({ idx, product }) {
   }
 
   const showProductClickHandeler = () => {
-    navigate(`/product?id=${product._id}`)
+    navigate(`/products/${product._id}/`)
   }
 
   return (
@@ -55,7 +55,6 @@ export function CartItem({ idx, product }) {
               .
               {' '}
             </span>
-            {/* <div /> */}
             <span onClick={showProductClickHandeler}>
               {product.name}
               {' '}

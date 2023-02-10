@@ -8,7 +8,7 @@ export function LikeProductItem({ idx, product }) {
   const navigate = useNavigate()
 
   const showProductClickHandeler = () => {
-    navigate(`/product?id=${product._id}`)
+    navigate(`/products/${product._id}/`)
   }
   return (
     <li className="list-group-item d-flex justify-content-between">

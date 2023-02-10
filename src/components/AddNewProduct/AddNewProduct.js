@@ -39,7 +39,7 @@ export function AddNewProduct() {
     mutationKey: CHANGEPRODUCT,
     mutationFn: changeProductFn,
     onSuccess: () => {
-      navigate(`/product/${productId._id}/`)
+      navigate(`/products/${productId._id}/`)
     },
   })
 
