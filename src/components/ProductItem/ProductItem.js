@@ -41,7 +41,7 @@ export function ProductItem({ product }) {
   const productClickHandler = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    navigate(`/product?id=${product._id}`)
+    navigate(`/product/${product._id}/`)
   }
 
   const compareClickHandler = (e) => {

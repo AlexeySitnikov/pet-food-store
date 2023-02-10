@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { api } from '../API/api'
 import { addToCart, removeFromCart } from '../Redux/Slices/productsSlice/productsSlice'
 import { BackButton } from './BackButton'
@@ -17,9 +17,10 @@ import { ModalProductComment } from './ModalProductComment'
 
 export function ProductPage() {
   const [isModalProductComment, setIsModalProductComment] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [input] = useState(() => searchParams.get('id') ?? '')
-  const GETPRODUCTID = [input]
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // const [input] = useState(() => searchParams.get('id') ?? '')
+  const { productId } = useParams()
+  const GETPRODUCTID = [productId]
   const GETUSER = ['GETUSER']
   const DELETEPRODUCT = ['DELETEPRODUCT']
   const dispatch = useDispatch()
@@ -28,12 +29,12 @@ export function ProductPage() {
   const products = useSelector((store) => store.products)
   const likeProducts = useSelector((cart) => cart.likeProduct)
 
-  useEffect(() => {
-    setSearchParams({ id: input })
-  }, [input])
+  // useEffect(() => {
+  //   setSearchParams({ id: input })
+  // }, [input])
 
   const getProductById = async () => {
-    const result = await api.getProductById(input)
+    const result = await api.getProductById(productId)
     return result
   }
 

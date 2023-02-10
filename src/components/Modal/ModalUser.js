@@ -77,7 +77,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
           validationSchema={Yup.object({
             email: Yup.string().email('Invalid email address').required('Required'),
           })}
-          onsubmit={needToChangeClickHandled}
+          onSubmit={needToChangeClickHandled}
         >
           <Form className={editUserStyles.editForm}>
 
@@ -109,7 +109,7 @@ export function ModalUser({ isOpen, closeModal, userInfo }) {
               type="submit"
               className="btn btn-primary"
               disabled={((initialName === userName) && (initialEmail === userEmail))}
-              onSubmit={needToChangeClickHandled}
+              onSubmit={() => needToChangeClickHandled}
             >
               Change
             </button>
